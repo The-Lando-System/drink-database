@@ -1,0 +1,22 @@
+{
+  "name": "drink-database",
+  "version": "0.0.1",
+  "description": "Database for the inebriated!",
+  "author": "The-Lando-System",
+  "dependencies": {
+    "bower": "latest",
+    "body-parser": "latest",
+    "express": "latest",
+    "method-override": "latest",
+    "mongoose": "latest",
+    "morgan": "latest",
+    "serve-favicon": "latest",
+    "jsonwebtoken": "latest",
+    "nodemon":"latest"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "start": "nodemon ./bin/www"
+  }
+}

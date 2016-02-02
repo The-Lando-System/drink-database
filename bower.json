@@ -1,0 +1,15 @@
+{
+  "name": "drink-database",
+  "version": "0.0.1",
+  "dependencies": {
+    "bootstrap": "latest",
+    "font-awesome": "latest",
+    "animate.css": "latest",
+    "angular": "latest",
+    "angular-route": "latest",
+    "angular-cookies": "latest",
+    "angular-jwt": "latest",
+    "angular-ui-router": "latest",
+    "angular-animate": "latest"
+  }
+}
