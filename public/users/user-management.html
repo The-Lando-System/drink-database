@@ -1,0 +1,24 @@
+<div class="container" ng-show="vm.userSession.isAdmin">
+  <h1>User Management</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>User:</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in vm.users">
+            <td><span class="user-select" ui-sref="user-page({ userId:user._id })">{{ user.username }}</span></td>
+            <td><span class="user-delete-icon" ng-click="vm.deleteUser(user)"><i class="fa fa-trash"></i></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <button class="btn btn-primary btn-lg" ui-sref="user-page">Create New User</button>
+  </div>
+</div>

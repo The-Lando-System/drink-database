@@ -7,7 +7,7 @@ var adminApiRoutes = express.Router();
 
 module.exports = function(app) {
 
-	// Admin To-Do API Routes ==============================
+	// Verify user token and ensure they are an admin role ==============================
 	adminApiRoutes.use(function(req,res,next){
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
 		if (token) {
@@ -18,6 +18,8 @@ module.exports = function(app) {
 					if (decoded._doc.role === 'admin'){
 						req.decoded = decoded._doc;
 						next();
+					} else {
+						return res.json({ success: false, message: 'You do not have an admin role!'});
 					}
 				}
 			});
@@ -69,6 +71,16 @@ module.exports = function(app) {
 				res.json({ message: 'User with ID ' + req.params.id + ' was successfully updated!' });
 			});
 		});
+	});
+
+	// Other admin routes ==============================================
+	adminApiRoutes.get('/goodbye/:username', function(req,res){
+		var goodbye = {
+			name: "GoodbyeMessage",
+			description: "This message says goodbye",
+			message: "Goodbye " + req.params.username
+		};
+		res.json(goodbye);
 	});
 
 	app.use('/admin',adminApiRoutes);

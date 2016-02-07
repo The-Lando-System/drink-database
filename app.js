@@ -39,7 +39,7 @@ app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 // Routes ==============================
 require('./app/adminRoutes')(app);
-require('./app/userRoutes')(app);
+require('./app/drinkRoutes')(app);
 require('./app/routes')(app);
 
 // Export the app ======================

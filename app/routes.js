@@ -8,7 +8,7 @@ var baseDir = path.resolve(__dirname + '/..');
 
 module.exports = function(app) {
 
-	// User Authentication
+	// User Authentication =====================
 	app.post('/authenticate', function(req,res){
 		User.findOne({
 			username: req.body.username		
@@ -36,19 +36,40 @@ module.exports = function(app) {
 	});
 
 	// Application Routes ======================
+	var index = baseDir + '/public/index.html';
 	app.get('/', function(req,res){
-		res.sendFile(baseDir + '/public/views/index.html');
+		res.sendFile(index);
 	});
 	app.get('/login', function(req,res){
-		res.sendFile(baseDir + '/public/views/login.html');
+		res.sendFile(index);
 	});
 	app.get('/home', function(req,res){
-		res.sendFile(baseDir + '/public/views/home.html');
+		res.sendFile(index);
+	});
+	app.get('/view1', function(req,res){
+		res.sendFile(index);
+	});
+	app.get('/view2', function(req,res){
+		res.sendFile(index);
 	});
 	app.get('/user-management', function(req,res){
-		res.sendFile(baseDir + '/public/views/user-management.html');
+		res.sendFile(index);
+	});
+	app.get('/user-management/*', function(req,res){
+		res.sendFile(index);
 	});
 	app.get('/user-page', function(req,res){
-		res.sendFile(baseDir + '/public/views/user.html');
+		res.sendFile(index);
+	});
+
+	// Common View Components ===================
+	app.get('/error-message', function(req,res){
+		res.sendFile(baseDir + '/public/common-components/error-message.html');
+	});
+	app.get('/navbar', function(req,res){
+		res.sendFile(baseDir + '/public/navbar/navbar.html');
+	});
+	app.get('/object-table', function(req,res){
+		res.sendFile(baseDir + '/public/common-components/object-table.html');
 	});
 };

@@ -1,0 +1,21 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" ui-sref="home"><i class="fa fa-rebel"></i></a>
+    </div>
+    <div class="navbar-left">
+      <ul class="nav navbar-nav">
+        <li><a ui-sref="view1">View 1</a></li>
+        <li><a ui-sref="view2">View 2</a></li>
+      </ul>
+    </div>
+    <div class="navbar-right">
+      <ul class="nav navbar-nav">
+        <li ng-hide="vm.userSession.user"><a ui-sref="login">Login</a></li>
+        <li ng-show="vm.userSession.user"><a><span class="user-welcome">Hello {{vm.userSession.user.firstName}}!</span></a></li>
+        <li ng-show="vm.userSession.user"><a href="" ng-click="vm.logout()">Logout</a></li>
+        <li ng-show="vm.userSession.isAdmin"><a ui-sref="users">User Management</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

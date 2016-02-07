@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row" ng-hide="vm.userSession.user">
+    <div class="col-sm-8 col-sm-offset-2 text-center">
+      <div class="login-text">
+        <h2>Please Login</h2>
+      </div>
+      <form name="loginForm" ng-submit="vm.login(loginForm.$valid)" novalidate>
+        <div class="login-form-group" ng-class="{ 'has-error' : vm.authFail && !loginForm.password.$pristine && !loginForm.username.$pristine }">
+          <div class="login-input">
+            <input type="text" name="username" class="form-control input-md text-center" placeholder="username" ng-model="vm.creds.username" required>
+          </div>
+          <div class="login-input">
+            <input type="password" name="password" class="form-control input-md text-center" placeholder="password" ng-model="vm.creds.password" required>
+          </div>
+        </div>
+        <div class="failed-auth" ng-show="vm.authFail">
+          <p>{{ vm.errorMessage }}</p>
+        </div>
+        <button type="submit" class="btn btn-success btn-lg" ng-disabled="loginForm.$invalid">Login</button>
+      </form>
+    </div>
+  </div>
+</div>

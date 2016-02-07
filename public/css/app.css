@@ -1,0 +1,39 @@
+.row {
+  margin-top: 10px;
+}
+
+.jumbotron {
+  background-color: #00cc99;
+  color: black;
+  margin-top: 20px;
+}
+
+.navbar-inverse .navbar-brand {
+  color: #cccccc;
+}
+
+.navbar-inverse .navbar-text {
+  color: #cccccc;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: #cccccc;
+}
+
+.user-welcome {
+  font-weight: bold;
+  color: white;
+}
+
+.login-input {
+	margin-bottom: 10px;
+}
+
+.user-select:hover {
+	cursor: pointer;
+	color: #336699;
+}
+
+.user-delete-icon:hover {
+	cursor: pointer;
+}

@@ -5,7 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>To-Do App</title>
+  <base href="/">
+
+  <title>Drink Database</title>
 
   <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.css">
@@ -21,17 +23,28 @@
   <script src="libs/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="libs/angular-animate/angular-animate.js"></script>
 
-  <script src="js/app.module.js"></script>
-  <script src="js/config/states.js"></script>
-  <script src="js/services/AuthService.js"></script>
-  <script src="js/factories/AdminFactories.js"></script>
-  <script src="js/controllers/HomeCtrl.js"></script>
-  <script src="js/controllers/LoginCtrl.js"></script>
-  <script src="js/controllers/UserMgmtCtrl.js"></script>
-  <script src="js/controllers/UserCtrl.js"></script>
+  <script src="app.module.js"></script>
+  <script src="routes/states.js"></script>
+  <script src="services/AuthService.js"></script>
+  <script src="factories/AdminFactories.js"></script>
+  <script src="factories/ExceptionFactory.js"></script>
+  <script src="factories/TestFactory.js"></script>
+  <script src="directives/errorMessage.js"></script>
+  <script src="directives/objectTable.js"></script>
+
+  <script src="navbar/NavbarDirective.js"></script>
+  <script src="navbar/NavbarCtrl.js"></script>
+
+  <script src="home/HomeCtrl.js"></script>
+  <script src="login/LoginCtrl.js"></script>
+  <script src="view1/View1Ctrl.js"></script>
+  <script src="view2/View2Ctrl.js"></script>
+  <script src="users/UserMgmtCtrl.js"></script>
+  <script src="users/UserCtrl.js"></script>
 
 </head>
 <body ng-app="myApp">
+  <navbar></navbar>
   <div class="jumbotron">
     <div class="container">
       <h1>Drink Database</h1>

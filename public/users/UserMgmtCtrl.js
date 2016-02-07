@@ -2,25 +2,29 @@
 
 angular.module('myApp').controller('userMgmtController', userMgmtController);
 
-userMgmtController.$inject = ['$scope','$location','jwtHelper','AuthService','UserFactory'];
+userMgmtController.$inject = ['$location','jwtHelper','AuthService','UserFactory'];
 
-function userMgmtController($scope,$location,jwtHelper,AuthService,UserFactory) {
+function userMgmtController($location,jwtHelper,AuthService,UserFactory) {
 
-	var getUsers = function(){
-		UserFactory.get($scope.userSession.token)
+	var vm = this;
+	vm.getUsers = getUsers;
+	vm.deleteUser = deleteUser;
+
+	function getUsers(){
+		UserFactory.get(vm.userSession.token)
 		.success(function(data){
-			$scope.users = data;
+			vm.users = data;
 		})
 		.error(function(data){
 			console.log('Error: ' + data);
 		});
 	};
 
-	$scope.deleteUser = function(user){
+	function deleteUser(user){
 		var confirmDelete = confirm('Are you sure you want to delete \'' + user.username + '\'?');
 
 		if (confirmDelete){
-			UserFactory.delete($scope.userSession.token,user._id)
+			UserFactory.delete(vm.userSession.token,user._id)
 			.success(function(data){
 				console.log(data);
 				getUsers();
@@ -32,8 +36,8 @@ function userMgmtController($scope,$location,jwtHelper,AuthService,UserFactory) 
 	};
 
 	angular.element(document).ready(function () {
-		$scope.userSession = AuthService.startUserSession();
-		if ($scope.userSession.user) {
+		vm.userSession = AuthService.startUserSession();
+		if (vm.userSession.user) {
 			getUsers();
 		} else {
 			$location.path('login');
