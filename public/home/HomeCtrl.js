@@ -9,7 +9,7 @@ function homeController(AuthService,drinkFactory) {
 
   vm.hello = "Add a new drink!";
   vm.drink = {};
-  vm.drink.type = "Choose a Type";
+  vm.drink.type = "Beer";
   vm.logout = logout;
   vm.addDrink = addDrink;
   vm.setType = setType;
