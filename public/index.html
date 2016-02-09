@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.css">
   <link rel="stylesheet" href="libs/animate.css/animate.css">
+  <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="css/app.css">
 
@@ -22,23 +23,24 @@
   <script src="libs/angular-route/angular-route.js"></script>
   <script src="libs/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="libs/angular-animate/angular-animate.js"></script>
+  <script src="libs/bootstrap/dist/js/bootstrap.js"></script>
 
   <script src="app.module.js"></script>
   <script src="routes/states.js"></script>
   <script src="services/AuthService.js"></script>
   <script src="factories/AdminFactories.js"></script>
   <script src="factories/ExceptionFactory.js"></script>
-  <script src="factories/TestFactory.js"></script>
   <script src="directives/errorMessage.js"></script>
-  <script src="directives/objectTable.js"></script>
 
   <script src="navbar/NavbarDirective.js"></script>
   <script src="navbar/NavbarCtrl.js"></script>
 
   <script src="home/HomeCtrl.js"></script>
   <script src="login/LoginCtrl.js"></script>
-  <script src="view1/View1Ctrl.js"></script>
-  <script src="view2/View2Ctrl.js"></script>
+
+  <script src="drinks/DrinkFactory.js"></script>
+  <script src="drinks/ViewDrinksCtrl.js"></script>
+  
   <script src="users/UserMgmtCtrl.js"></script>
   <script src="users/UserCtrl.js"></script>
 
@@ -47,7 +49,7 @@
   <navbar></navbar>
   <div class="jumbotron">
     <div class="container">
-      <h1>Drink Database</h1>
+      <h1 class="site-header">Drink Database</h1>
     </div>
   </div>
   <div ui-view></div>

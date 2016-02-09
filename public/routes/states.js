@@ -20,16 +20,10 @@ function config($urlRouterProvider,$stateProvider,$locationProvider) {
     controller: 'homeController',
     controllerAs: 'vm'
   })
-  .state('view1', {
-    url: '/view1',
-    templateUrl: '/view1/view1.html',
-    controller: 'view1Controller',
-    controllerAs: 'vm'
-  })
-  .state('view2', {
-    url: '/view2',
-    templateUrl: '/view2/view2.html',
-    controller: 'view2Controller',
+  .state('view-drinks', {
+    url: '/view-drinks',
+    templateUrl: '/drinks/view-drinks.html',
+    controller: 'viewDrinksController',
     controllerAs: 'vm'
   })
   .state('users', {

@@ -3,3 +3,80 @@
     <h2>{{vm.hello}}</h2>
   </div>
 </div>
+<div class="row">
+  <div class="container">
+    <table class="table">
+        <tbody>
+        <tr>
+          <td><h4>Type:</h4></td>
+          <td>
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">{{vm.drink.type}}
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="vm.setType('Beer')">Beer</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="vm.setType('Wine')">Wine</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="vm.setType('Whiskey')">Whiskey</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="vm.setType('Other')">Other</a></li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><h4>Name:</h4></td>
+          <td><input type="text" class="form-control input-lg" placeholder="Drink Name" ng-model="vm.drink.name"></input></td>
+        </tr>
+        <tr>
+          <td><h4>Style:</h4></td>
+          <td><input type="text" class="form-control input-lg" placeholder="Drink Style" ng-model="vm.drink.style"></input></td>
+        </tr>
+        <tr>
+          <td><h4>Company:</h4></td>
+          <td><input type="text" class="form-control input-lg" placeholder="Name of the Company" ng-model="vm.drink.company"></input></td>
+        </tr>
+        <tr>
+          <td><h4>ABV:</h4></td>
+          <td><input type="text" class="form-control input-lg" placeholder="Alcohol By Volume" ng-model="vm.drink.abv"></input></td>
+        </tr>
+        <tr>
+          <td><h4>City:</h4></td>
+          <td><input type="text" class="form-control input-lg" placeholder="City where Produced" ng-model="vm.drink.city"></input></td>
+        </tr>
+        <tr>
+          <td><h4>State:</h4></td>
+          <td><input type="text" class="form-control input-lg" placeholder="State where Produced" ng-model="vm.drink.state"></input></td>
+        </tr>
+        <tr>
+          <td><h4>Taste Notes:</h4></td>
+          <td><input type="text" class="form-control input-lg" placeholder="Description" ng-model="vm.drink.tasteNotes"></input></td>
+        </tr>
+        <tr>
+          <td><h4>Smell Notes:</h4></td>
+          <td><input type="text" class="form-control input-lg" placeholder="Description" ng-model="vm.drink.smellNotes"></input></td>
+        </tr>
+        <tr>
+          <td><h4>Other Notes:</h4></td>
+          <td><input type="text" class="form-control input-lg" placeholder="Description" ng-model="vm.drink.otherNotes"></input></td>
+        </tr>
+        <tr>
+          <td><h4>Rating:</h4></td>
+          <td><input type="text" class="form-control input-lg" placeholder="Number between 1 and 10" ng-model="vm.drink.rating"></input></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="container">
+    <div class="col-md-2">
+      <button class="btn btn-primary btn-large" ng-click="vm.addDrink()">Add New Drink</button>
+    </div>
+    <div class="col-md-6">
+      <div ng-show="vm.errorMessage">
+        <error-message></error-message>
+      </div>
+    </div>
+  </div>
+</div>
+<br/>
+<br/>

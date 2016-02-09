@@ -46,10 +46,7 @@ module.exports = function(app) {
 	app.get('/home', function(req,res){
 		res.sendFile(index);
 	});
-	app.get('/view1', function(req,res){
-		res.sendFile(index);
-	});
-	app.get('/view2', function(req,res){
+	app.get('/view-drinks', function(req,res){
 		res.sendFile(index);
 	});
 	app.get('/user-management', function(req,res){
@@ -68,8 +65,5 @@ module.exports = function(app) {
 	});
 	app.get('/navbar', function(req,res){
 		res.sendFile(baseDir + '/public/navbar/navbar.html');
-	});
-	app.get('/object-table', function(req,res){
-		res.sendFile(baseDir + '/public/common-components/object-table.html');
 	});
 };

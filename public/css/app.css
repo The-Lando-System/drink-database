@@ -20,6 +20,10 @@
   color: #cccccc;
 }
 
+.site-header {
+  font-family: 'Lobster', cursive;
+}
+
 .user-welcome {
   font-weight: bold;
   color: white;
