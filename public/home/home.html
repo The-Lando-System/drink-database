@@ -3,7 +3,7 @@
     <h2>{{vm.hello}}</h2>
   </div>
 </div>
-<form name="newBeerForm" ng-submit="vm.addDrink()" novalidate>
+<form name="newDrinkForm" ng-submit="vm.addDrink()" novalidate>
   <div class="row">
     <div class="container">
       <table class="table">
@@ -70,7 +70,7 @@
   <div class="row">
     <div class="container">
       <div class="col-md-2">
-        <button type="submit" class="btn btn-primary btn-large" ng-disabled="newBeerForm.$invalid">Add New Drink</button>
+        <button type="submit" class="btn btn-primary btn-large" ng-disabled="newDrinkForm.$invalid">Add New Drink</button>
       </div>
       <div class="col-md-6">
         <div ng-show="vm.errorMessage">
