@@ -33,7 +33,11 @@ module.exports = function(app) {
 	drinkApiRoutes.get('/', function(req,res){
 		Drink.find({}, function(err,drinks){
 			if (err) { res.send(err) };
-			res.json(drinks);
+			if (drinks.length === 0) {
+				res.send({ message: "No drinks found!" });
+			} else {
+				res.json(drinks);
+			}
 		});
 	});
 
@@ -88,6 +92,20 @@ module.exports = function(app) {
 		Drink.remove({ _id: req.params.id }, function(err,drink){
 			if (err) { res.send(err) };
 			res.json({ message: 'Successfully removed drink with id ' + req.params.id });
+		});
+	});
+
+	// Get drinks by name
+	drinkApiRoutes.post('/findByName', function(req,res){
+		Drink.find({
+			name: { $regex : new RegExp(req.body.drinkName, "i") }
+		}, function(err,drinks){
+			if (err) { res.send(err) };
+			if (drinks.length === 0) {
+				res.send({ message: "No drinks found!" });
+			} else {
+				res.json(drinks);
+			}
 		});
 	});
 

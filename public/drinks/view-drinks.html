@@ -1,14 +1,41 @@
 <div class="row">
   <div class="container">
     <div class="col-md-2">
-      <button class="btn btn-primary btn-large" ng-click="vm.getDrinks()">View All Drinks</button>
+      <button class="btn btn-primary btn-large" ng-click="vm.showSearch = true">Find Drink by Name</button>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-info btn-large" ng-click="vm.getDrinks()">View All Drinks</button>
     </div>
     <div class="col-md-6">
       <div ng-show="vm.errorMessage">
         <error-message></error-message>
       </div>
     </div>
+    <div class="col-md-2">
+    </div>
+  </div>
+</div>
+<div class="row" ng-show="vm.showSearch">
+  <div class="container">
     <div class="col-md-4">
+      <div class="input-group">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-click="vm.findDrinkByName()">Search</button>
+        </span>
+        <input type="text" class="form-control" ng-model="vm.drinkName" placeholder="Enter Drink Name">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" ng-show="vm.isLoading">
+  <div class="container">
+    <img src="/images/hex-loader.gif" height="100" width="150">
+  </div>
+</div>
+<div class="row" ng-show="vm.noDrinksMessage">
+  <div class="container">
+    <div class="col-md-4">
+      <h3>{{vm.noDrinksMessage}}</h3>
     </div>
   </div>
 </div>

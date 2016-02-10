@@ -20,6 +20,8 @@ function homeController(AuthService,drinkFactory) {
 	};
 
   function addDrink(){
+    vm.drink.addedBy = vm.userSession.user.username;
+    vm.drink.timeAdded = (new Date()).toString();
     drinkFactory.addDrink(vm.userSession.token,vm.drink,successCallback,errorCallback);
     vm.drink = {};
   };

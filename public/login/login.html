@@ -1,6 +1,11 @@
 <div class="container">
   <div class="row" ng-hide="vm.userSession.user">
-    <div class="col-sm-8 col-sm-offset-2 text-center">
+    <div class="col-sm-8 text-center" ng-show="vm.isLoading">
+      <div class="container">
+        <img src="/images/hex-loader.gif" height="100" width="150">
+      </div>
+    </div>
+    <div class="col-sm-8 col-sm-offset-2 text-center" ng-hide="vm.isLoading">
       <div class="login-text">
         <h2>Please Login</h2>
       </div>

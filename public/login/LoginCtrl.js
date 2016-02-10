@@ -9,15 +9,18 @@ function loginController($window,$location,jwtHelper,AuthService) {
 	var vm = this;
 
 	vm.authFail = false;
+	vm.isLoading = false;
 	vm.login = login;
 
 	function login(formIsValid){
 		if (formIsValid){
+			vm.isLoading = true;
 			AuthService.login(vm.creds, function(data){
 				if (data.success) {
 					vm.userSession = AuthService.startUserSession();
-					//$window.location.reload();
+					vm.isLoading = false;
 				} else {
+					vm.isLoading = false;
 					vm.authFail = true;
 					vm.errorMessage = data.message;
 				}

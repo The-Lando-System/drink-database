@@ -9,20 +9,43 @@ function viewDrinksController(AuthService,drinkFactory) {
   var vm = this;
   
   vm.getDrinks = getDrinks;
+  vm.findDrinkByName = findDrinkByName;
+  vm.drinkName = '';
+  vm.showSearch = false;
   vm.drinks = false;
   vm.errorMessage = false;
+  vm.noDrinksMessage = false;
+  vm.isLoading = false;
   
   function getDrinks(){
+    vm.isLoading = true;
     vm.errorMessage = false;
-    drinkFactory.getDrinks(vm.userSession.token,successCallback,errorCallback);
+    vm.showSearch = false;
+    vm.noDrinksMessage = false;
+    vm.drinkName = '';
+    drinkFactory.getDrinks(vm.userSession.token,setDrinks,errorCallback);
   };
   
-  function successCallback(data){
-    vm.drinks = data;
+  function setDrinks(data){
+    if (data.hasOwnProperty('message')){
+      vm.noDrinksMessage = 'No Drinks Were Found!';
+    } else {
+      vm.drinks = data;
+    }
+    vm.isLoading = false;
   };
   
   function errorCallback(err){
     vm.errorMessage = err;
+    vm.isLoading = false;
+  };
+
+  function findDrinkByName(){
+    vm.isLoading = true;
+    vm.errorMessage = false;
+    vm.noDrinksMessage = false;
+    vm.drinks = false;
+    drinkFactory.findDrinkByName(vm.userSession.token,vm.drinkName,setDrinks,errorCallback);
   };
 
   angular.element(document).ready(function () {
