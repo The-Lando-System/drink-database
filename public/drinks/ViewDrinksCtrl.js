@@ -10,12 +10,16 @@ function viewDrinksController(AuthService,drinkFactory) {
   
   vm.getDrinks = getDrinks;
   vm.findDrinkByName = findDrinkByName;
+  vm.isEditingDrink = isEditingDrink;
+  vm.beginEditDrink = beginEditDrink;
+  vm.updateDrink = updateDrink;
   vm.drinkName = '';
   vm.showSearch = false;
   vm.drinks = false;
   vm.errorMessage = false;
   vm.noDrinksMessage = false;
   vm.isLoading = false;
+  vm.editedDrink = { _id:'' };
   
   function getDrinks(){
     vm.isLoading = true;
@@ -56,6 +60,27 @@ function viewDrinksController(AuthService,drinkFactory) {
     } else {
       drinkFactory.findDrinkByName(vm.userSession.token,vm.drinkName,setDrinks,errorCallback);
     }
+  };
+
+  function isEditingDrink(id){
+    return vm.editedDrink._id === id ? true : false;
+  };
+
+  function beginEditDrink(id){
+    for (var i=0; i<vm.drinks.length; i++){
+      if (vm.drinks[i]._id === id){
+        vm.editedDrink = vm.drinks[i];
+        return;
+      }
+    }
+  };
+
+  function updateDrink(){
+    vm.editedDrink.addedBy = vm.userSession.user.username;
+    vm.editedDrink.timeAdded = (new Date()).toString();
+
+    console.log(vm.editedDrink);
+    vm.editedDrink = { _id:'' };
   };
 
   angular.element(document).ready(function () {

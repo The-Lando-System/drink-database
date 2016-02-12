@@ -44,4 +44,4 @@ require('./app/routes')(app);
 
 // Export the app ======================
 exports = module.exports = app;
-console.log("------> Ready! <---------");
+console.log("------> Ready! <--------");
