@@ -67,17 +67,17 @@ module.exports = function(app) {
 	drinkApiRoutes.put('/:drinkId', function(req,res){
 		Drink.findById(req.params.drinkId, function(err,drink){
 			if (err) { res.send(err) };
-			drink.name 				= req.body.name 			|| drink.name;
-			drink.type  			= req.body.type 			|| drink.type;
+			drink.name 			= req.body.name 		|| drink.name;
+			drink.type  		= req.body.type 		|| drink.type;
 			drink.style     	= req.body.style     	|| drink.style;
 			drink.company  		= req.body.company  	|| drink.company;
-			drink.abv  				= req.body.abv  			|| drink.abv;
+			drink.abv  			= req.body.abv  		|| drink.abv;
 			drink.city      	= req.body.city      	|| drink.city;
-			drink.state      	= req.body.state      || drink.state;
-			drink.tasteNotes  = req.body.tasteNotes || drink.tasteNotes;
-			drink.smellNotes  = req.body.smellNotes || drink.smellNotes;
-			drink.otherNotes  = req.body.otherNotes || drink.otherNotes;
-			drink.rating      = req.body.rating     || drink.rating;
+			drink.state      	= req.body.state      	|| drink.state;
+			drink.tasteNotes  	= req.body.tasteNotes 	|| drink.tasteNotes;
+			drink.smellNotes  	= req.body.smellNotes 	|| drink.smellNotes;
+			drink.otherNotes  	= req.body.otherNotes 	|| drink.otherNotes;
+			drink.rating      	= req.body.rating     	|| drink.rating;
 			drink.addedBy 		= req.body.addedBy 		|| drink.addedBy;
 			drink.timeAdded 	= req.body.timeAdded 	|| drink.timeAdded;
 			drink.save(function(err){

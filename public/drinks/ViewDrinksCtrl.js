@@ -79,8 +79,13 @@ function viewDrinksController(AuthService,drinkFactory) {
     vm.editedDrink.addedBy = vm.userSession.user.username;
     vm.editedDrink.timeAdded = (new Date()).toString();
 
-    console.log(vm.editedDrink);
+    drinkFactory.editDrink(vm.userSession.token,vm.editedDrink,drinkEditedCallback,errorCallback);
+    
     vm.editedDrink = { _id:'' };
+  };
+
+  function drinkEditedCallback(data){
+    console.log(data);
   };
 
   angular.element(document).ready(function () {
