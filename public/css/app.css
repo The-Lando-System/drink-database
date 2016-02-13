@@ -38,10 +38,6 @@
 	color: #336699;
 }
 
-.user-delete-icon:hover {
+.clickable-icon:hover {
 	cursor: pointer;
-}
-
-.edit-drink-icon:hover {
-  cursor: pointer;
 }

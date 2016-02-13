@@ -12,7 +12,7 @@
         <tbody>
           <tr ng-repeat="user in vm.users">
             <td><span class="user-select" ui-sref="user-page({ userId:user._id })">{{ user.username }}</span></td>
-            <td><span class="user-delete-icon" ng-click="vm.deleteUser(user)"><i class="fa fa-trash"></i></span></td>
+            <td><span class="clickable-icon" ng-click="vm.deleteUser(user)"><i class="fa fa-trash"></i></span></td>
           </tr>
         </tbody>
       </table>

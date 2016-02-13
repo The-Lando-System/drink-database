@@ -20,10 +20,10 @@ function config($urlRouterProvider,$stateProvider,$locationProvider) {
     controller: 'homeController',
     controllerAs: 'vm'
   })
-  .state('view-drinks', {
-    url: '/view-drinks',
-    templateUrl: '/drinks/view-drinks.html',
-    controller: 'viewDrinksController',
+  .state('drink-finder', {
+    url: '/drink-finder',
+    templateUrl: '/drink-finder/drink-finder.html',
+    controller: 'drinkFinderController',
     controllerAs: 'vm'
   })
   .state('users', {

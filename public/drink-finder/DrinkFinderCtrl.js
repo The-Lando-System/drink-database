@@ -1,10 +1,10 @@
 (function() { 'use strict';
 
-angular.module('myApp').controller('viewDrinksController', viewDrinksController);
+angular.module('myApp').controller('drinkFinderController', drinkFinderController);
 
-viewDrinksController.$inject = ['AuthService','drinkFactory'];
+drinkFinderController.$inject = ['AuthService','drinkFactory'];
 
-function viewDrinksController(AuthService,drinkFactory) {
+function drinkFinderController(AuthService,drinkFactory) {
   
   var vm = this;
   
@@ -13,12 +13,14 @@ function viewDrinksController(AuthService,drinkFactory) {
   vm.isEditingDrink = isEditingDrink;
   vm.beginEditDrink = beginEditDrink;
   vm.updateDrink = updateDrink;
+  vm.deleteDrink = deleteDrink;
   vm.drinkName = '';
   vm.showSearch = false;
   vm.drinks = false;
   vm.errorMessage = false;
   vm.noDrinksMessage = false;
   vm.isLoading = false;
+  vm.editMode = false;
   vm.editedDrink = { _id:'' };
   
   function getDrinks(){
@@ -86,6 +88,15 @@ function viewDrinksController(AuthService,drinkFactory) {
 
   function drinkEditedCallback(data){
     console.log(data);
+  };
+
+  function deleteDrink(id){
+    var confirmDelete = confirm('Are you sure you want to delete?');
+    if (confirmDelete){
+      drinkFactory.deleteDrink(vm.userSession.token,id,drinkEditedCallback,errorCallback)
+    }
+    vm.drinks = false;
+    vm.editMode = false;
   };
 
   angular.element(document).ready(function () {

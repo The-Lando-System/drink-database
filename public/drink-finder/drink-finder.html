@@ -55,7 +55,10 @@
           <th>Taste Notes</th>
           <th>Smell Notes</th>
           <th>Other Notes</th>
-          <th></th>
+          <th>
+            <span class="clickable-icon" ng-click="vm.editMode = true" ng-hide="vm.editMode"><i class="fa fa-pencil-square-o"></i></span>
+            <span class="clickable-icon" ng-click="vm.editMode = false" ng-show="vm.editMode"><i class="fa fa-ban"></i></span>
+          </th>
         </tr>
       </thead>
         <tbody>
@@ -104,11 +107,12 @@
           <td ng-show="vm.isEditingDrink(drink._id)">
             <input type="text" class="form-control input-md" ng-model="vm.editedDrink.otherNotes"></input>
           </td>
-          <td ng-hide="vm.isEditingDrink(drink._id)">
-            <span class="edit-drink-icon" ng-click="vm.beginEditDrink(drink._id)"><i class="fa fa-pencil-square-o"></i></span>
+          <td ng-hide="vm.isEditingDrink(drink._id) || !vm.editMode">
+            <span class="clickable-icon" ng-click="vm.beginEditDrink(drink._id)"><i class="fa fa-pencil-square-o"></i></span>
+            <span class="clickable-icon" ng-click="vm.deleteDrink(drink._id)"><i class="fa fa-trash"></i></span>
           </td>
           <td ng-show="vm.isEditingDrink(drink._id)">
-            <span class="edit-drink-icon" ng-click="vm.updateDrink()"><i class="fa fa-thumbs-o-up"></i></span>
+            <span class="clickable-icon" ng-click="vm.updateDrink()"><i class="fa fa-thumbs-o-up"></i></span>
           </td>
         </tr>
       </tbody>

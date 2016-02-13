@@ -9,7 +9,8 @@ function drinkFactory($http, exception) {
     getDrinks:  getDrinks,
     addDrink:   addDrink,
     findDrinkByName: findDrinkByName,
-    editDrink: editDrink
+    editDrink: editDrink,
+    deleteDrink: deleteDrink
   };
     
   function getDrinks(token,successCallback,errorCallback){
@@ -67,6 +68,22 @@ function drinkFactory($http, exception) {
       }
     };
     return $http.put('/drinks/' + drink._id, drink, header)
+    .success(function(data){
+      return successCallback(data);
+    })
+    .error(function(error){
+      var err = exception.catchSvcException(error);
+      return errorCallback(err.name + err.message);
+    });
+  };
+
+  function deleteDrink(token,id,successCallback,errorCallback){
+    var header = {
+      headers: { 
+        'x-access-token': token 
+      }
+    };
+    return $http.delete('/drinks/' + id, header)
     .success(function(data){
       return successCallback(data);
     })

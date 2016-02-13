@@ -46,7 +46,7 @@ module.exports = function(app) {
 	app.get('/home', function(req,res){
 		res.sendFile(index);
 	});
-	app.get('/view-drinks', function(req,res){
+	app.get('/drink-finder', function(req,res){
 		res.sendFile(index);
 	});
 	app.get('/user-management', function(req,res){
