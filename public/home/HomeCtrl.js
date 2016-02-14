@@ -2,14 +2,15 @@
 
 angular.module('myApp').controller('homeController', homeController);
 
-homeController.$inject = ['AuthService','drinkFactory'];
+homeController.$inject = ['AuthService','drinkFactory','$location','$anchorScroll'];
 
-function homeController(AuthService,drinkFactory) {
+function homeController(AuthService,drinkFactory,$location,$anchorScroll) {
 	var vm = this;
 
   vm.hello = "Add a new drink!";
   vm.drink = {};
   vm.drink.type = "Beer";
+  vm.successMessage = false;
   vm.logout = logout;
   vm.addDrink = addDrink;
   vm.setType = setType;
@@ -24,10 +25,14 @@ function homeController(AuthService,drinkFactory) {
     vm.drink.timeAdded = (new Date()).toString();
     drinkFactory.addDrink(vm.userSession.token,vm.drink,successCallback,errorCallback);
     vm.drink = {};
+    vm.drink.type = "Beer";
   };
 
   function successCallback(data){
+    vm.successMessage = "Drink successfully created!";
     console.log(data);
+    $location.hash('top');
+    $anchorScroll();
   };
   
   function errorCallback(err){
@@ -40,6 +45,9 @@ function homeController(AuthService,drinkFactory) {
 
   angular.element(document).ready(function () {
     vm.userSession = AuthService.startUserSession();
+    if (!vm.userSession.user){
+      $location.path('login');
+    }
   });
 
 };

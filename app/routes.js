@@ -63,6 +63,9 @@ module.exports = function(app) {
 	app.get('/error-message', function(req,res){
 		res.sendFile(baseDir + '/public/common-components/error-message.html');
 	});
+	app.get('/success-message', function(req,res){
+		res.sendFile(baseDir + '/public/common-components/success-message.html');
+	});
 	app.get('/navbar', function(req,res){
 		res.sendFile(baseDir + '/public/navbar/navbar.html');
 	});

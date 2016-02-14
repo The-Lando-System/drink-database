@@ -2,9 +2,9 @@
 
 angular.module('myApp').controller('drinkFinderController', drinkFinderController);
 
-drinkFinderController.$inject = ['AuthService','drinkFactory'];
+drinkFinderController.$inject = ['AuthService','drinkFactory','$location'];
 
-function drinkFinderController(AuthService,drinkFactory) {
+function drinkFinderController(AuthService,drinkFactory,$location) {
   
   var vm = this;
   
@@ -93,14 +93,23 @@ function drinkFinderController(AuthService,drinkFactory) {
   function deleteDrink(id){
     var confirmDelete = confirm('Are you sure you want to delete?');
     if (confirmDelete){
-      drinkFactory.deleteDrink(vm.userSession.token,id,drinkEditedCallback,errorCallback)
+      drinkFactory.deleteDrink(vm.userSession.token,id,drinkEditedCallback,errorCallback);
+      var i;
+      for (i=0; i<vm.drinks.length; i++){
+        if (vm.drinks[i]._id === id){
+          break;
+        }
+      }
+      vm.drinks.splice(i,1);
     }
-    vm.drinks = false;
     vm.editMode = false;
   };
 
   angular.element(document).ready(function () {
     vm.userSession = AuthService.startUserSession();
+    if (!vm.userSession.user){
+      $location.path('login');
+    }
   });
   
 };
