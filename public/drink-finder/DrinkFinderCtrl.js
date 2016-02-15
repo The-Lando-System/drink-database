@@ -29,12 +29,7 @@ function drinkFinderController(AuthService,drinkFactory,$location) {
     vm.showSearch = false;
     vm.noDrinksMessage = false;
     vm.drinkName = '';
-    if (!vm.userSession.user){
-      vm.noDrinksMessage = 'You need to login to find drinks!'
-      vm.isLoading = false;
-    } else {
-      drinkFactory.getDrinks(vm.userSession.token,setDrinks,errorCallback);
-    }
+    drinkFactory.getDrinks(vm.userSession.token,setDrinks,errorCallback);
   };
   
   function setDrinks(data){
@@ -56,12 +51,7 @@ function drinkFinderController(AuthService,drinkFactory,$location) {
     vm.errorMessage = false;
     vm.noDrinksMessage = false;
     vm.drinks = false;
-    if (!vm.userSession.user){
-      vm.noDrinksMessage = 'You need to login to find drinks!'
-      vm.isLoading = false;
-    } else {
-      drinkFactory.findDrinkByName(vm.userSession.token,vm.drinkName,setDrinks,errorCallback);
-    }
+    drinkFactory.findDrinkByName(vm.userSession.token,vm.drinkName,setDrinks,errorCallback);
   };
 
   function isEditingDrink(id){
@@ -107,9 +97,6 @@ function drinkFinderController(AuthService,drinkFactory,$location) {
 
   angular.element(document).ready(function () {
     vm.userSession = AuthService.startUserSession();
-    if (!vm.userSession.user){
-      $location.path('login');
-    }
   });
   
 };

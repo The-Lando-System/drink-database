@@ -3,12 +3,12 @@ var express = require('express');
 
 var User = require('./models/user');
 
-var adminApiRoutes = express.Router();
+var adminUserRoutes = express.Router();
 
 module.exports = function(app) {
 
 	// Verify user token and ensure they are an admin role ==============================
-	adminApiRoutes.use(function(req,res,next){
+	adminUserRoutes.use(function(req,res,next){
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
 		if (token) {
 			jwt.verify(token, app.get('superSecret'), function(err,decoded){
@@ -32,13 +32,13 @@ module.exports = function(app) {
 	});
 
 	// Routes for the users API, only exposed to admin users ======================
-	adminApiRoutes.get('/users', function(req,res){
+	adminUserRoutes.get('/users', function(req,res){
 		User.find({}, function(err,users){
 			if (err) { res.send(err) };
 			res.json(users);
 		});
 	});
-	adminApiRoutes.post('/users', function(req,res){
+	adminUserRoutes.post('/users', function(req,res){
 		User.create({
 			firstName: req.body.firstName,
 			lastName:  req.body.lastName,
@@ -51,13 +51,13 @@ module.exports = function(app) {
 			res.json({ message: 'User successfully created!' });
 		});
 	});
-	adminApiRoutes.delete('/users/:id', function(req,res){
+	adminUserRoutes.delete('/users/:id', function(req,res){
 		User.remove({ _id: req.params.id }, function(err,user){
 			if (err) { res.send(err) };
 			res.json({ message: 'Successfully removed user with id ' + req.params.id });
 		});
 	});
-	adminApiRoutes.put('/users/:id', function(req,res){
+	adminUserRoutes.put('/users/:id', function(req,res){
 		User.findById(req.params.id, function(err,user){
 			if (err) { res.send(err) };
 			user.firstName = req.body.firstName || user.firstName;
@@ -74,7 +74,7 @@ module.exports = function(app) {
 	});
 
 	// Other admin routes ==============================================
-	adminApiRoutes.get('/goodbye/:username', function(req,res){
+	adminUserRoutes.get('/goodbye/:username', function(req,res){
 		var goodbye = {
 			name: "GoodbyeMessage",
 			description: "This message says goodbye",
@@ -83,6 +83,6 @@ module.exports = function(app) {
 		res.json(goodbye);
 	});
 
-	app.use('/admin',adminApiRoutes);
+	app.use('/admin',adminUserRoutes);
 
 };
