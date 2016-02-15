@@ -2,12 +2,13 @@
 
 angular.module('myApp').controller('drinkFinderController', drinkFinderController);
 
-drinkFinderController.$inject = ['AuthService','drinkFactory','$location'];
+drinkFinderController.$inject = ['AuthService','drinkFactory'];
 
-function drinkFinderController(AuthService,drinkFactory,$location) {
+function drinkFinderController(AuthService,drinkFactory) {
   
   var vm = this;
   
+  vm.userSession = AuthService.startUserSession();
   vm.getDrinks = getDrinks;
   vm.findDrinkByName = findDrinkByName;
   vm.isEditingDrink = isEditingDrink;
@@ -29,7 +30,7 @@ function drinkFinderController(AuthService,drinkFactory,$location) {
     vm.showSearch = false;
     vm.noDrinksMessage = false;
     vm.drinkName = '';
-    drinkFactory.getDrinks(vm.userSession.token,setDrinks,errorCallback);
+    drinkFactory.getDrinks(setDrinks,errorCallback);
   };
   
   function setDrinks(data){
@@ -51,7 +52,7 @@ function drinkFinderController(AuthService,drinkFactory,$location) {
     vm.errorMessage = false;
     vm.noDrinksMessage = false;
     vm.drinks = false;
-    drinkFactory.findDrinkByName(vm.userSession.token,vm.drinkName,setDrinks,errorCallback);
+    drinkFactory.findDrinkByName(vm.drinkName,setDrinks,errorCallback);
   };
 
   function isEditingDrink(id){
@@ -94,10 +95,6 @@ function drinkFinderController(AuthService,drinkFactory,$location) {
     }
     vm.editMode = false;
   };
-
-  angular.element(document).ready(function () {
-    vm.userSession = AuthService.startUserSession();
-  });
   
 };
 

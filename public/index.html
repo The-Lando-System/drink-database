@@ -9,13 +9,16 @@
 
   <title>Drink Database</title>
 
+  <!-- External Styles -->
   <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.css">
   <link rel="stylesheet" href="libs/animate.css/animate.css">
   <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 
+  <!-- My Styles -->
   <link rel="stylesheet" href="css/app.css">
 
+  <!-- External JS Libraries -->
   <script src="libs/jquery/dist/jquery.js"></script>
   <script src="libs/angular/angular.js"></script>
   <script src="libs/angular-cookies/angular-cookies.js"></script>
@@ -25,25 +28,25 @@
   <script src="libs/angular-animate/angular-animate.js"></script>
   <script src="libs/bootstrap/dist/js/bootstrap.js"></script>
 
+  <!-- App Setup -->
   <script src="app.module.js"></script>
   <script src="routes/states.js"></script>
+
+  <!-- Common Factories/Services/Directives -->
   <script src="services/AuthService.js"></script>
   <script src="factories/AdminFactories.js"></script>
-  <script src="factories/ExceptionFactory.js"></script>
   <script src="directives/errorMessage.js"></script>
   <script src="directives/successMessage.js"></script>
 
+  <!-- Application JS -->
   <script src="navbar/NavbarDirective.js"></script>
   <script src="navbar/NavbarCtrl.js"></script>
-
-  <script src="home/HomeCtrl.js"></script>
-  <script src="login/LoginCtrl.js"></script>
-
-  <script src="factories/DrinkFactory.js"></script>
-  <script src="drink-finder/DrinkFinderCtrl.js"></script>
-  
   <script src="users/UserMgmtCtrl.js"></script>
   <script src="users/UserCtrl.js"></script>
+  <script src="home/HomeCtrl.js"></script>
+  <script src="login/LoginCtrl.js"></script>
+  <script src="factories/DrinkFactory.js"></script>
+  <script src="drink-finder/DrinkFinderCtrl.js"></script>
 
 </head>
 <body ng-app="myApp">

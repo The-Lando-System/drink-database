@@ -12,11 +12,14 @@ module.exports = function(app) {
 	// Get all drinks
 	drinkRoutes.get('/', function(req,res){
 		Drink.find({}, function(err,drinks){
-			if (err) { res.send(err) };
-			if (drinks.length === 0) {
-				res.send({ message: "No drinks found!" });
+			if (err) {
+				res.send(err)
 			} else {
-				res.json(drinks);
+				if (drinks.length === 0) {
+					res.send({ message: "No drinks found!" });
+				} else {
+					res.json(drinks);
+				}
 			}
 		});
 	});
@@ -26,11 +29,14 @@ module.exports = function(app) {
 		Drink.find({
 			name: { $regex : new RegExp(req.body.drinkName, "i") }
 		}, function(err,drinks){
-			if (err) { res.send(err) };
-			if (drinks.length === 0) {
-				res.send({ message: "No drinks found!" });
+			if (err) {
+				res.send(err)
 			} else {
-				res.json(drinks);
+				if (drinks.length === 0) {
+					res.send({ message: "No drinks found!" });
+				} else {
+					res.json(drinks);
+				}
 			}
 		});
 	});

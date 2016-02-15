@@ -7,6 +7,7 @@ homeController.$inject = ['AuthService','drinkFactory','$location','$anchorScrol
 function homeController(AuthService,drinkFactory,$location,$anchorScroll) {
 	var vm = this;
 
+  vm.userSession = AuthService.startUserSession();
   vm.hello = "Add a new drink!";
   vm.drink = {};
   vm.drink.type = "Beer";
@@ -42,13 +43,6 @@ function homeController(AuthService,drinkFactory,$location,$anchorScroll) {
   function setType(type){
     vm.drink.type = type;
   };
-
-  angular.element(document).ready(function () {
-    vm.userSession = AuthService.startUserSession();
-    if (!vm.userSession.user){
-      $location.path('login');
-    }
-  });
 
 };
 

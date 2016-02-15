@@ -2,13 +2,16 @@
 
 angular.module('myApp').controller('userMgmtController', userMgmtController);
 
-userMgmtController.$inject = ['$location','jwtHelper','AuthService','UserFactory'];
+userMgmtController.$inject = ['jwtHelper','AuthService','UserFactory'];
 
-function userMgmtController($location,jwtHelper,AuthService,UserFactory) {
+function userMgmtController(jwtHelper,AuthService,UserFactory) {
 
 	var vm = this;
+
+	vm.userSession = AuthService.startUserSession();
 	vm.getUsers = getUsers;
 	vm.deleteUser = deleteUser;
+	getUsers();
 
 	function getUsers(){
 		UserFactory.get(vm.userSession.token)
@@ -34,15 +37,6 @@ function userMgmtController($location,jwtHelper,AuthService,UserFactory) {
 			});
 		}
 	};
-
-	angular.element(document).ready(function () {
-		vm.userSession = AuthService.startUserSession();
-		if (vm.userSession.user) {
-			getUsers();
-		} else {
-			$location.path('login');
-		}
-	});
 
 };
 

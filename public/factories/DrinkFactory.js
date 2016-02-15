@@ -2,9 +2,9 @@
 
 angular.module('myApp').factory('drinkFactory', drinkFactory);
 
-drinkFactory.$inject = ['$http','exception'];
+drinkFactory.$inject = ['$http'];
 
-function drinkFactory($http, exception) {
+function drinkFactory($http) {
   return {
     getDrinks:  getDrinks,
     addDrink:   addDrink,
@@ -13,19 +13,13 @@ function drinkFactory($http, exception) {
     deleteDrink: deleteDrink
   };
     
-  function getDrinks(token,successCallback,errorCallback){
-    var header = {
-      headers: { 
-        'x-access-token': token 
-      }
-    };
-    return $http.get('/drinks/', header)
+  function getDrinks(successCallback,errorCallback){
+    return $http.get('/drinks/')
     .success(function(data){
       return successCallback(data);
     })
     .error(function(error){
-      var err = exception.catchSvcException(error);
-      return errorCallback(err.name + err.message);
+      return errorCallback(error);
     });
   };
 
@@ -40,24 +34,17 @@ function drinkFactory($http, exception) {
       return successCallback(data);
     })
     .error(function(error){
-      var err = exception.catchSvcException(error);
-      return errorCallback(err.name + err.message);
+      return errorCallback(error);
     });
   };
 
-  function findDrinkByName(token,drinkName,successCallback,errorCallback){
-    var header = {
-      headers: { 
-        'x-access-token': token 
-      }
-    };
-    return $http.post('/drinks/findByName', {drinkName: drinkName}, header)
+  function findDrinkByName(drinkName,successCallback,errorCallback){
+    return $http.post('/drinks/findByName', {drinkName: drinkName})
     .success(function(data){
       return successCallback(data);
     })
     .error(function(error){
-      var err = exception.catchSvcException(error);
-      return errorCallback(err.name + err.message);
+      return errorCallback(error);
     });
   };
 
@@ -72,8 +59,7 @@ function drinkFactory($http, exception) {
       return successCallback(data);
     })
     .error(function(error){
-      var err = exception.catchSvcException(error);
-      return errorCallback(err.name + err.message);
+      return errorCallback(error);
     });
   };
 
@@ -88,8 +74,7 @@ function drinkFactory($http, exception) {
       return successCallback(data);
     })
     .error(function(error){
-      var err = exception.catchSvcException(error);
-      return errorCallback(err.name + err.message);
+      return errorCallback(error);
     });
   };
 };

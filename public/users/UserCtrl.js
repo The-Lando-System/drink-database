@@ -7,25 +7,32 @@ userController.$inject = ['$location','$stateParams','jwtHelper','AuthService','
 function userController($location,$stateParams,jwtHelper,AuthService,UserFactory) {
 
 	var vm = this;
+
+	var userId = $stateParams.userId || false;
+
+	vm.userSession = AuthService.startUserSession();
+	vm.isCreate = userId ? false : true;
 	vm.editedUser = {};
 	vm.getUser = getUser;
 	vm.updateUser = updateUser;
 	vm.createUser = createUser;
 
-	var userId = $stateParams.userId || false;
+	getUser();	
 
 	function getUser() {
-		UserFactory.get(vm.userSession.token)
-		.success(function(users){
-			for (var i=0;i<users.length;i++){
-				if (users[i]._id === userId){
-					vm.editedUser = users[i];
+		if (!vm.isCreate){
+			UserFactory.get(vm.userSession.token)
+			.success(function(users){
+				for (var i=0;i<users.length;i++){
+					if (users[i]._id === userId){
+						vm.editedUser = users[i];
+					}
 				}
-			}
-		})
-		.error(function(data){
-			console.log('Error: ' + data);
-		});
+			})
+			.error(function(data){
+				console.log('Error: ' + data);
+			});
+		}
 	};
 
 	function updateUser(){
@@ -48,16 +55,6 @@ function userController($location,$stateParams,jwtHelper,AuthService,UserFactory
 			console.log('Error: ' + data);
 		});
 	};
-
-	angular.element(document).ready(function () {
-		vm.userSession = AuthService.startUserSession();
-		if (vm.userSession.user) {
-			getUser();
-		} else {
-			$location.path('login');
-		}
-		vm.isCreate = userId ? false : true;
-	});
 };
 
 })();
