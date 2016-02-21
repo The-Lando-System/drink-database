@@ -1,6 +1,6 @@
 (function() { 'use strict';
 
-angular.module('myApp', [
+angular.module('drink-db', [
 	'ngCookies',
 	'angular-jwt',
 	'ngRoute',

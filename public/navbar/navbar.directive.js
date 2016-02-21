@@ -1,12 +1,13 @@
 (function() { 'use strict';
 
-angular.module('myApp').directive('navbar', navbar);
+angular.module('drink-db')
+.directive('navbar', navbar);
 
 function navbar() {
   return {
     restrict: 'E',
     templateUrl: '/navbar',
-    controller: 'navbarController',
+    controller: 'NavbarController',
     controllerAs: 'vm'
   };
 };

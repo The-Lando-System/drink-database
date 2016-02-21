@@ -21,6 +21,9 @@ module.exports = function(app) {
 	staticRoutes.get('/drink-finder', function(req,res){
 		res.sendFile(index);
 	});
+	staticRoutes.get('/drink-viewer', function(req,res){
+		res.sendFile(index);
+	});
 	staticRoutes.get('/user-management', function(req,res){
 		res.sendFile(index);
 	});

@@ -1,10 +1,11 @@
 (function() { 'use strict';
 
-angular.module('myApp').controller('navbarController', navbarController);
+angular.module('drink-db')
+.controller('NavbarController', NavbarController);
 
-navbarController.$inject = ['AuthService','$scope'];
+NavbarController.$inject = ['AuthService','$scope'];
 
-function navbarController(AuthService,$scope) {
+function NavbarController(AuthService,$scope) {
   
   var vm = this;
   vm.logout = logout;

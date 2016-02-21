@@ -1,10 +1,11 @@
 (function() { 'use strict';
 
-angular.module('myApp').controller('homeController', homeController);
+angular.module('drink-db')
+.controller('HomeController', HomeController);
 
-homeController.$inject = ['AuthService','drinkFactory','$location','$anchorScroll'];
+HomeController.$inject = ['AuthService','DrinkFactory','$location','$anchorScroll'];
 
-function homeController(AuthService,drinkFactory,$location,$anchorScroll) {
+function HomeController(AuthService,drinkFactory,$location,$anchorScroll) {
 	var vm = this;
 
   vm.userSession = AuthService.startUserSession();
@@ -24,7 +25,7 @@ function homeController(AuthService,drinkFactory,$location,$anchorScroll) {
   function addDrink(){
     vm.drink.addedBy = vm.userSession.user.username;
     vm.drink.timeAdded = (new Date()).toString();
-    drinkFactory.addDrink(vm.userSession.token,vm.drink,successCallback,errorCallback);
+    DrinkFactory.addDrink(vm.userSession.token,vm.drink,successCallback,errorCallback);
     vm.drink = {};
     vm.drink.type = "Beer";
   };

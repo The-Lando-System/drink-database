@@ -1,6 +1,7 @@
 (function() { 'use strict';
 
-angular.module('myApp').directive('successMessage', successMessage);
+angular.module('drink-db')
+.directive('successMessage', successMessage);
 
 function successMessage() {
   return {

@@ -1,10 +1,11 @@
 (function() { 'use strict';
 
-angular.module('myApp').factory('drinkFactory', drinkFactory);
+angular.module('drink-db')
+.factory('DrinkFactory', DrinkFactory);
 
-drinkFactory.$inject = ['$http'];
+DrinkFactory.$inject = ['$http'];
 
-function drinkFactory($http) {
+function DrinkFactory($http) {
   return {
     getDrinks:  getDrinks,
     addDrink:   addDrink,

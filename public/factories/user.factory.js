@@ -1,6 +1,7 @@
 (function() { 'use strict';
 
-angular.module('myApp').factory('UserFactory', UserFactory);
+angular.module('drink-db')
+.factory('UserFactory', UserFactory);
 
 UserFactory.$inject = ['$http'];
 

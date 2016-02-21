@@ -1,10 +1,11 @@
 (function() { 'use strict';
 
-angular.module('myApp').controller('drinkFinderController', drinkFinderController);
+angular.module('drink-db')
+.controller('DrinkFinderController', DrinkFinderController);
 
-drinkFinderController.$inject = ['AuthService','drinkFactory'];
+DrinkFinderController.$inject = ['AuthService','DrinkFactory'];
 
-function drinkFinderController(AuthService,drinkFactory) {
+function DrinkFinderController(AuthService,DrinkFactory) {
   
   var vm = this;
   
@@ -30,7 +31,7 @@ function drinkFinderController(AuthService,drinkFactory) {
     vm.showSearch = false;
     vm.noDrinksMessage = false;
     vm.drinkName = '';
-    drinkFactory.getDrinks(setDrinks,errorCallback);
+    DrinkFactory.getDrinks(setDrinks,errorCallback);
   };
   
   function setDrinks(data){
@@ -52,7 +53,7 @@ function drinkFinderController(AuthService,drinkFactory) {
     vm.errorMessage = false;
     vm.noDrinksMessage = false;
     vm.drinks = false;
-    drinkFactory.findDrinkByName(vm.drinkName,setDrinks,errorCallback);
+    DrinkFactory.findDrinkByName(vm.drinkName,setDrinks,errorCallback);
   };
 
   function isEditingDrink(id){
@@ -72,7 +73,7 @@ function drinkFinderController(AuthService,drinkFactory) {
     vm.editedDrink.addedBy = vm.userSession.user.username;
     vm.editedDrink.timeAdded = (new Date()).toString();
 
-    drinkFactory.editDrink(vm.userSession.token,vm.editedDrink,drinkEditedCallback,errorCallback);
+    DrinkFactory.editDrink(vm.userSession.token,vm.editedDrink,drinkEditedCallback,errorCallback);
     
     vm.editedDrink = { _id:'' };
   };
@@ -84,7 +85,7 @@ function drinkFinderController(AuthService,drinkFactory) {
   function deleteDrink(id){
     var confirmDelete = confirm('Are you sure you want to delete?');
     if (confirmDelete){
-      drinkFactory.deleteDrink(vm.userSession.token,id,drinkEditedCallback,errorCallback);
+      DrinkFactory.deleteDrink(vm.userSession.token,id,drinkEditedCallback,errorCallback);
       var i;
       for (i=0; i<vm.drinks.length; i++){
         if (vm.drinks[i]._id === id){

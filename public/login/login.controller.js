@@ -1,10 +1,11 @@
 (function() { 'use strict';
 
-angular.module('myApp').controller('loginController', loginController);
+angular.module('drink-db')
+.controller('LoginController', LoginController);
 
-loginController.$inject = ['$window','$location','jwtHelper','AuthService'];
+LoginController.$inject = ['$window','$location','jwtHelper','AuthService'];
 
-function loginController($window,$location,jwtHelper,AuthService) {
+function LoginController($window,$location,jwtHelper,AuthService) {
 	
 	var vm = this;
 

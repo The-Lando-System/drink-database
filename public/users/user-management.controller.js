@@ -1,10 +1,11 @@
 (function() { 'use strict';
 
-angular.module('myApp').controller('userMgmtController', userMgmtController);
+angular.module('drink-db')
+.controller('UserMgmtController', UserMgmtController);
 
-userMgmtController.$inject = ['jwtHelper','AuthService','UserFactory'];
+UserMgmtController.$inject = ['jwtHelper','AuthService','UserFactory'];
 
-function userMgmtController(jwtHelper,AuthService,UserFactory) {
+function UserMgmtController(jwtHelper,AuthService,UserFactory) {
 
 	var vm = this;
 

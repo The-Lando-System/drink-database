@@ -29,27 +29,30 @@
   <script src="libs/bootstrap/dist/js/bootstrap.js"></script>
 
   <!-- App Setup -->
-  <script src="app.module.js"></script>
-  <script src="routes/states.js"></script>
+  <script src="drink-db.module.js"></script>
+  <script src="configuration/drink-db.states.js"></script>
 
-  <!-- Common Factories/Services/Directives -->
-  <script src="services/AuthService.js"></script>
-  <script src="factories/AdminFactories.js"></script>
-  <script src="directives/errorMessage.js"></script>
-  <script src="directives/successMessage.js"></script>
+  <!-- Factories/Services/Directives -->
+  <script src="services/auth.service.js"></script>
+  <script src="factories/user.factory.js"></script>
+  <script src="factories/drink.factory.js"></script>
+  <script src="directives/error-message.directive.js"></script>
+  <script src="directives/success-message.directive.js"></script>
+  <script src="navbar/navbar.directive.js"></script>
 
-  <!-- Application JS -->
-  <script src="navbar/NavbarDirective.js"></script>
-  <script src="navbar/NavbarCtrl.js"></script>
-  <script src="users/UserMgmtCtrl.js"></script>
-  <script src="users/UserCtrl.js"></script>
-  <script src="home/HomeCtrl.js"></script>
-  <script src="login/LoginCtrl.js"></script>
-  <script src="factories/DrinkFactory.js"></script>
-  <script src="drink-finder/DrinkFinderCtrl.js"></script>
+  <!-- Controllers -->
+  <script src="navbar/navbar.controller.js"></script>
+  <script src="users/user-management.controller.js"></script>
+  <script src="users/user.controller.js"></script>
+  <script src="home/home.controller.js"></script>
+  <script src="login/login.controller.js"></script>
+  <script src="drink-finder/drink-finder.controller.js"></script>
+  <script src="drink-viewer/drink-viewer.controller.js"></script>
 
 </head>
-<body ng-app="myApp">
+
+<!-- App Body -->
+<body ng-app="drink-db">
   <navbar></navbar>
   <div class="jumbotron">
     <div class="container">
@@ -58,4 +61,5 @@
   </div>
   <div ui-view></div>
 </body>
+
 </html>

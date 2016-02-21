@@ -1,6 +1,7 @@
 (function() { 'use strict';
 
-angular.module('myApp').factory('AuthService', AuthService);
+angular.module('drink-db')
+.factory('AuthService', AuthService);
 
 AuthService.$inject = ['$http','$cookies','$location','jwtHelper','$rootScope'];
 
