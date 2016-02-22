@@ -34,11 +34,6 @@ module.exports = function(app) {
 		res.sendFile(index);
 	});
 
-	// Resources ================================
-	staticRoutes.get('/hello-json', function(req,res){
-		res.sendFile(baseDir + '/public/resources/hello.json');
-	});
-
 	// Common View Components ===================
 	staticRoutes.get('/error-message', function(req,res){
 		res.sendFile(baseDir + '/public/common-components/error-message.html');
