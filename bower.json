@@ -10,6 +10,7 @@
     "angular-cookies": "latest",
     "angular-jwt": "latest",
     "angular-ui-router": "latest",
-    "angular-animate": "latest"
+    "angular-animate": "latest",
+    "d3":"latest"
   }
 }

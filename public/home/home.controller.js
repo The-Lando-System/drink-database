@@ -5,7 +5,7 @@ angular.module('drink-db')
 
 HomeController.$inject = ['AuthService','DrinkFactory','$location','$anchorScroll'];
 
-function HomeController(AuthService,drinkFactory,$location,$anchorScroll) {
+function HomeController(AuthService,DrinkFactory,$location,$anchorScroll) {
 	var vm = this;
 
   vm.userSession = AuthService.startUserSession();
