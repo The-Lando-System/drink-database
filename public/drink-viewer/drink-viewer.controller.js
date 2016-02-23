@@ -58,7 +58,25 @@ function DrinkViewerController(AuthService,DrinkFactory) {
     }
 
     // Get all drink names
+    for (var i=0; i<drinks.length; i++){
 
+      var newChild = {
+        name:"",
+        parent:""
+      };
+
+      for (var j=0; j<vm.drinkTree.children.length; j++){
+        if (drinks[i].type === vm.drinkTree.children[j].name){
+          if (!vm.drinkTree.children[j].hasOwnProperty('children')){
+            vm.drinkTree.children[j].children = [];
+          }
+
+          newChild.name = drinks[i].name + ': ' + drinks[i].style;
+          newChild.parent = vm.drinkTree.children[j].name;
+          vm.drinkTree.children[j].children.push(newChild);
+        }
+      }
+    }
 
     doD3Shit();
 
