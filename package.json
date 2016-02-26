@@ -12,7 +12,8 @@
     "morgan": "latest",
     "serve-favicon": "latest",
     "jsonwebtoken": "latest",
-    "nodemon":"latest"
+    "nodemon":"latest",
+    "password-hash":"latest"
   },
   "scripts": {
     "postinstall": "bower install",

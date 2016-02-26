@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var favicon = require('serve-favicon');
 var jwt = require('jsonwebtoken');
+var passwordHash = require('password-hash');
 var User = require('./app/models/user');
 
 // Configuration ======================
@@ -56,7 +57,7 @@ app.post('/authenticate', function(req,res){
 			console.log("WARNING: Authentication failed! Could not find user: " + req.body.username);
 			res.json({ success: false, message: 'Authentication failed, user not found!' });
 		} else if (user) {
-			if (user.password != req.body.password) {
+			if (!passwordHash.verify(req.body.password, user.password)) {
 				console.log("WARNING: Authentication failed! Wrong password for user: " + req.body.username);
 				res.json({ success: false, message: 'Authentication failed, wrong password!' });
 			} else {

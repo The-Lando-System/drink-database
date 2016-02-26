@@ -27,6 +27,7 @@ function UserController($location,$stateParams,jwtHelper,AuthService,UserFactory
 				for (var i=0;i<users.length;i++){
 					if (users[i]._id === userId){
 						vm.editedUser = users[i];
+						vm.editedUser.password = '';
 					}
 				}
 			})

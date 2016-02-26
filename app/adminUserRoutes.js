@@ -1,5 +1,6 @@
 var jwt = require('jsonwebtoken');
 var express = require('express');
+var passwordHash = require('password-hash'); 
 
 var User = require('./models/user');
 
@@ -44,7 +45,7 @@ module.exports = function(app) {
 			lastName:  req.body.lastName,
 			email:     req.body.email,
 			username:  req.body.username,
-			password:  req.body.password,
+			password:  passwordHash.generate(req.body.password),
 			role:      req.body.role 
 		}, function(err,user){
 			if (err) { res.send(err) };
@@ -60,11 +61,12 @@ module.exports = function(app) {
 	adminUserRoutes.put('/users/:id', function(req,res){
 		User.findById(req.params.id, function(err,user){
 			if (err) { res.send(err) };
+			var passwd = req.body.password.trim() === '' ? user.password : passwordHash.generate(req.body.password);
 			user.firstName = req.body.firstName || user.firstName;
 			user.lastName  = req.body.lastName  || user.lastName;
 			user.email     = req.body.email     || user.email;
 			user.username  = req.body.username  || user.username;
-			user.password  = req.body.password  || user.password;
+			user.password  = passwd;
 			user.role      = req.body.role      || user.role;
 			user.save(function(err){
 				if (err) { res.send(err) };
