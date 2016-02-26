@@ -2,13 +2,13 @@ var jwt = require('jsonwebtoken');
 var express = require('express');
 var path = require('path');
 
-var baseDir = path.resolve(__dirname + '/..');
+var base = path.resolve(__dirname + '/../..');
 var staticRoutes = express.Router();
 
 module.exports = function(app) {
 
 	// Application States  ======================
-	var index = baseDir + '/public/index.html';
+	var index = base + '/public/index.html';
 	staticRoutes.get('/', function(req,res){
 		res.sendFile(index);
 	});
@@ -36,13 +36,13 @@ module.exports = function(app) {
 
 	// Common View Components ===================
 	staticRoutes.get('/error-message', function(req,res){
-		res.sendFile(baseDir + '/public/common-components/error-message.html');
+		res.sendFile(base + '/public/app/directives/error-message/error-message.html');
 	});
 	staticRoutes.get('/success-message', function(req,res){
-		res.sendFile(baseDir + '/public/common-components/success-message.html');
+		res.sendFile(base + '/public/app/directives/success-message/success-message.html');
 	});
 	staticRoutes.get('/navbar', function(req,res){
-		res.sendFile(baseDir + '/public/navbar/navbar.html');
+		res.sendFile(base + '/public/app/layout/navbar/navbar.html');
 	});
 
 	app.use('/',staticRoutes);

@@ -10,37 +10,37 @@ function config($urlRouterProvider,$stateProvider,$locationProvider) {
   $stateProvider
   .state('login', {
     url: '/login',
-    templateUrl: '/login/login.html',
+    templateUrl: '/app/layout/login/login.html',
     controller: 'LoginController',
     controllerAs: 'vm'
   })
   .state('home', {
     url: '/home',
-    templateUrl: '/home/home.html',
+    templateUrl: '/app/layout/home/home.html',
     controller: 'HomeController',
     controllerAs: 'vm'
   })
   .state('drink-finder', {
     url: '/drink-finder',
-    templateUrl: '/drink-finder/drink-finder.html',
+    templateUrl: '/app/layout/drink-finder/drink-finder.html',
     controller: 'DrinkFinderController',
     controllerAs: 'vm'
   })
   .state('drink-viewer', {
     url: '/drink-viewer',
-    templateUrl: '/drink-viewer/drink-viewer.html',
+    templateUrl: '/app/layout/drink-viewer/drink-viewer.html',
     controller: 'DrinkViewerController',
     controllerAs: 'vm'
   })
   .state('users', {
     url: '/user-management',
-    templateUrl: '/users/user-management.html',
+    templateUrl: '/app/layout/users/user-management.html',
     controller: 'UserMgmtController',
     controllerAs: 'vm'
   })
   .state('user-page', {
     url: '/user-management/:userId',
-    templateUrl: '/users/user.html',
+    templateUrl: '/app/layout/users/user.html',
     controller: 'UserController',
     controllerAs: 'vm'
   });

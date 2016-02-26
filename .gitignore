@@ -1,4 +1,5 @@
-data/
-config/
-public/libs/
-node_modules/
+/data/
+/config/
+/public/libs/
+/node_modules/
+/npm-debug.log

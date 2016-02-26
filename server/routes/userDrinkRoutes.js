@@ -1,7 +1,8 @@
 var jwt = require('jsonwebtoken');
 var express = require('express');
-
-var Drink = require('./models/drink');
+var path = require('path');
+var base = path.resolve(__dirname + '/../..');
+var Drink = require(base + '/server/models/drink');
 
 var userDrinkRoutes = express.Router();
 

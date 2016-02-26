@@ -1,8 +1,9 @@
 var jwt = require('jsonwebtoken');
 var express = require('express');
-var passwordHash = require('password-hash'); 
-
-var User = require('./models/user');
+var passwordHash = require('password-hash');
+var path = require('path'); 
+var base = path.resolve(__dirname + '/../..');
+var User = require(base + '/server/models/user');
 
 var adminUserRoutes = express.Router();
 

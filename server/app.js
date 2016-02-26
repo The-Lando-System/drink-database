@@ -1,4 +1,7 @@
 // Set Up =============================
+var path = require('path');
+var base = path.resolve(__dirname + '/..');
+
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
@@ -8,13 +11,13 @@ var methodOverride = require('method-override');
 var favicon = require('serve-favicon');
 var jwt = require('jsonwebtoken');
 var passwordHash = require('password-hash');
-var User = require('./app/models/user');
+var User = require(base + '/server/models/user');
 
 // Configuration ======================
 console.log("----- Configuration -----");
 var devConfig = false;
 try {
-	devConfig = require('./config/config');
+	devConfig = require(base + '/config/config');
 	console.log('[x] Found Dev Config File! Happy Debugging!');
 } catch(err) {
 	console.log('[x] No Dev Config File... Going into Production!');
@@ -28,24 +31,25 @@ try {
 	console.log('[x] Successfully Connected to Mongo!');
 } catch(err) {
 	console.log('[] Failed to Connect to Mongo.....');
+	console.log(err);
 }
 
 app.set('superSecret', secretStr);
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(base + '/public'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ 'extended':'true' }));
 app.use(bodyParser.json());
 app.use(bodyParser.json({ type:'application/vnd.api+json' }));
 app.use(methodOverride('X-HTTP-Method-Override'));
-app.use(favicon(__dirname + '/public/images/favicon.ico'));
+app.use(favicon(base + '/public/images/favicon.ico'));
 
 // Routes ==============================
-require('./app/staticRoutes')(app);
-require('./app/drinkRoutes')(app);
-require('./app/userDrinkRoutes')(app);
-require('./app/adminDrinkRoutes')(app);
-require('./app/adminUserRoutes')(app);
+require(base + '/server/routes/staticRoutes')(app);
+require(base + '/server/routes/drinkRoutes')(app);
+require(base + '/server/routes/userDrinkRoutes')(app);
+require(base + '/server/routes/adminDrinkRoutes')(app);
+require(base + '/server/routes/adminUserRoutes')(app);
 
 // User Authentication =================
 app.post('/authenticate', function(req,res){
