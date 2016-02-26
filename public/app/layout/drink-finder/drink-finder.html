@@ -3,21 +3,20 @@
     <h2>Find a Drink!</h2>    
   </div>
 </div>
-
 <div class="row">
   <div class="container">
-    <div class="col-md-2">
-      <button class="btn btn-primary btn-large" ng-click="vm.showSearch = true">Find Drink by Name</button>
-    </div>
-    <div class="col-md-2">
-      <button class="btn btn-info btn-large" ng-click="vm.getDrinks()">View All Drinks</button>
-    </div>
-    <div class="col-md-6">
-      <div ng-show="vm.errorMessage">
-        <error-message></error-message>
-      </div>
-    </div>
-    <div class="col-md-2">
+    <button class="btn btn-primary btn-large" ng-click="vm.showSearch = true">Find Drink by Name</button>
+  </div>
+</div>
+<div class="row">
+  <div class="container">
+    <button class="btn btn-info btn-large" ng-click="vm.getDrinks()">View All Drinks</button>
+  </div>
+</div>
+<div class="row">
+  <div class="container">
+    <div ng-show="vm.errorMessage">
+      <error-message></error-message>
     </div>
   </div>
 </div>
@@ -46,7 +45,7 @@
   </div>
 </div>
 <div class="row" ng-show="vm.drinks">
-  <div class="container">
+  <div id="drink-table" class="container">
     <table class="table table-hover">
       <thead>
         <tr>

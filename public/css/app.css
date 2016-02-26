@@ -41,3 +41,11 @@
 .clickable-icon:hover {
 	cursor: pointer;
 }
+
+#drink-table {
+  overflow: auto;
+}
+
+#drink-tree {
+  overflow: auto;
+}
