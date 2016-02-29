@@ -18,10 +18,16 @@ module.exports = function(app) {
 	staticRoutes.get('/home', function(req,res){
 		res.sendFile(index);
 	});
+	staticRoutes.get('/add-drink', function(req,res){
+		res.sendFile(index);
+	});
 	staticRoutes.get('/drink-finder', function(req,res){
 		res.sendFile(index);
 	});
 	staticRoutes.get('/drink-viewer', function(req,res){
+		res.sendFile(index);
+	});
+	staticRoutes.get('/user-drinks', function(req,res){
 		res.sendFile(index);
 	});
 	staticRoutes.get('/user-management', function(req,res){

@@ -20,6 +20,12 @@ function config($urlRouterProvider,$stateProvider,$locationProvider) {
     controller: 'HomeController',
     controllerAs: 'vm'
   })
+  .state('drink-admin', {
+    url: '/drink-admin',
+    templateUrl: '/app/layout/drink-administration/drink-administration.html',
+    controller: 'DrinkAdministrationController',
+    controllerAs: 'vm'
+  })
   .state('drink-finder', {
     url: '/drink-finder',
     templateUrl: '/app/layout/drink-finder/drink-finder.html',
@@ -30,6 +36,12 @@ function config($urlRouterProvider,$stateProvider,$locationProvider) {
     url: '/drink-viewer',
     templateUrl: '/app/layout/drink-viewer/drink-viewer.html',
     controller: 'DrinkViewerController',
+    controllerAs: 'vm'
+  })
+  .state('user-drinks', {
+    url: '/user-drinks',
+    templateUrl: '/app/layout/user-drinks/user-drinks.html',
+    controller: 'UserDrinksController',
     controllerAs: 'vm'
   })
   .state('users', {

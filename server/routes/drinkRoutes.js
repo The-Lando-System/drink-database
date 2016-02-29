@@ -42,6 +42,21 @@ module.exports = function(app) {
 		});
 	});
 
+	// Find a drink by its ID
+	drinkRoutes.get('/:drinkId', function(req,res){
+		Drink.find({_id:req.params.drinkId}, function(err,drinks){
+			if (err) {
+				res.send(err)
+			} else {
+				if (drinks.length === 0) {
+					res.send({ message: "No drinks found!" });
+				} else {
+					res.json(drinks);
+				}
+			}
+		});
+	});
+
 	app.use('/drinks',drinkRoutes);
 
 };

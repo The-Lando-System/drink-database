@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var base = path.resolve(__dirname + '/../..');
 var Drink = require(base + '/server/models/drink');
+var UserDrink = require(base + '/server/models/user-drink');
 
 var userDrinkRoutes = express.Router();
 
@@ -30,28 +31,22 @@ module.exports = function(app) {
 
 	// Drinks API ==================================
 
-	// Create a drink
+	// Create a drink for a user
 	userDrinkRoutes.post('/', function(req,res){
-		Drink.create({
-			name: 			req.body.name,
-			type: 			req.body.type,
-			style: 			req.body.style,
-			company: 		req.body.company,
-			abv: 				req.body.abv,
-			city: 			req.body.city,
-			state: 			req.body.state,
+		UserDrink.create({
+			userId: 	req.body.userId,
+			drinkId: 	req.body.drinkId,
 			tasteNotes: req.body.tasteNotes,
 			smellNotes: req.body.smellNotes,
 			otherNotes: req.body.otherNotes,
-			rating: 		req.body.rating,
-			addedBy: 		req.body.addedBy,
-			timeAdded: 	req.body.timeAdded 
+			rating: 	req.body.rating
 		}, function(err,drink){
 			if (err) { res.send(err) };
-			res.json({ message: 'Drink with ID ' + drink._id + ' successfully created!' });
+			res.json({ message: 'Drink successfully added for user!' });
 		});
 	});
 
-	app.use('/drinks',userDrinkRoutes);
+
+	app.use('/user-drinks',userDrinkRoutes);
 
 };
