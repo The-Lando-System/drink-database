@@ -37,8 +37,10 @@ function UserDrinksController(AuthService,DrinkFactory) {
     vm.showSearch = false;
     vm.noDrinksMessage = false;
     vm.showAddDrink = false;
+    vm.userDrinks = false;
     vm.drinkName = '';
     DrinkFactory.getUserDrinks(vm.userSession.token,vm.userSession.user.username,setUserDrinks,errorCallback);
+  
   };
 
   function setUserDrinks(data){
@@ -57,11 +59,13 @@ function UserDrinksController(AuthService,DrinkFactory) {
       vm.drinks = data;
     }
     vm.isLoading = false;
+    vm.userDrinks = false;
   };
   
   function errorCallback(err){
     vm.errorMessage = err;
     vm.isLoading = false;
+    vm.userDrinks = false;
   };
 
   function findDrinkByName(){
@@ -69,6 +73,7 @@ function UserDrinksController(AuthService,DrinkFactory) {
     vm.errorMessage = false;
     vm.noDrinksMessage = false;
     vm.drinks = false;
+    vm.userDrinks = false;
     DrinkFactory.findDrinkByName(vm.drinkName,setDrinks,errorCallback);
   };
 
@@ -124,6 +129,7 @@ function UserDrinksController(AuthService,DrinkFactory) {
     vm.isLoading = false;
     vm.editMode = false;
     vm.showAddDrink = false;
+    vm.userDrinks = false;
   };
 
   function drinkSuccessfullyAdded(data){
@@ -143,6 +149,7 @@ function UserDrinksController(AuthService,DrinkFactory) {
     vm.isLoading = false;
     vm.editMode = false;
     vm.showAddDrink = true;
+    vm.userDrinks = false;
   };
   
 };

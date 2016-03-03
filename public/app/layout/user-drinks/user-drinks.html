@@ -5,12 +5,7 @@
 </div>
 <div class="row">
   <div class="container">
-    <button class="btn btn-primary btn-large" ng-click="vm.showAddDrink = true; vm.showSearch = false; vm.drinks = false;">Add a Drink!</button>
-  </div>
-</div>
-<div class="row">
-  <div class="container">
-    <button class="btn btn-primary btn-large" ng-click="vm.showSearch = true; vm.showAddDrink = false;">Find Drink by Name</button>
+    <button class="btn btn-primary btn-large" ng-click="vm.showSearch = true; vm.showAddDrink = false; vm.userDrinks = false;">Find a new Drink!</button>
   </div>
 </div>
 <div class="row">
@@ -129,6 +124,43 @@
               <span class="clickable-icon" ng-click="vm.updateDrink()"><i class="fa fa-thumbs-o-up"></i></span>
             </td>
           </div>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row" ng-show="vm.userDrinks">
+  <div id="drink-table" class="container">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Name</th>
+          <th>Style</th>
+          <th>ABV</th>
+          <th>Rating</th>
+          <th>Company</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Taste Notes</th>
+          <th>Smell Notes</th>
+          <th>Other Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="drink in vm.userDrinks">    
+          <td>{{drink.type}}</td>
+          <td>{{drink.name}}</td>
+          <td>{{drink.style}}</td>
+          <td>{{drink.abv}}</td>
+          <td>{{drink.rating}}</td>
+          <td>{{drink.company}}</td>
+          <td>{{drink.city}}</td>
+          <td>{{drink.state}}</td>
+          <td>{{drink.tasteNotes}}</td>
+          <td>{{drink.smellNotes}}</td>
+          <td>{{drink.otherNotes}}</td>
         </tr>
       </tbody>
     </table>

@@ -46,6 +46,37 @@ module.exports = function(app) {
 		});
 	});
 
+	// Retrieve all drinks tied to a user ID
+	userDrinkRoutes.get('/:userId', function(req,res){
+		UserDrink.find({userId:req.params.userId}, function(err,userDrinks){
+			if (err) { res.send(err) };
+			if (userDrinks.length===0) { res.send({'message':'No drinks found!'})};
+
+			// For each user drink, find the rest of the drink data, add it to an object,
+			// and return that to the user. Recurse to find drinks synchronously.
+			drinks = [];
+			findNextUserDrink(0);
+			function findNextUserDrink(i){
+				if (i>userDrinks.length-1){
+					res.send(drinks);
+					return;
+				}
+				Drink.find({_id:userDrinks[i].drinkId}, function(err,drink){
+					if (drink && drink.length>0){
+						drink[0].tasteNotes = userDrinks[i].tasteNotes;
+						drink[0].otherNotes = userDrinks[i].otherNotes;
+						drink[0].smellNotes = userDrinks[i].smellNotes;
+						drink[0].rating = userDrinks[i].rating;
+						drinks.push(drink[0]);	
+					}
+					findNextUserDrink(i+1);
+				});
+			};
+		});
+	});
+
+
+	
 
 	app.use('/user-drinks',userDrinkRoutes);
 
