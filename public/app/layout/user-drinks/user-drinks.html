@@ -139,13 +139,14 @@
           <th>Name</th>
           <th>Style</th>
           <th>ABV</th>
-          <th>Rating</th>
           <th>Company</th>
           <th>City</th>
           <th>State</th>
           <th>Taste Notes</th>
           <th>Smell Notes</th>
           <th>Other Notes</th>
+          <th>Rating</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -154,13 +155,32 @@
           <td>{{drink.name}}</td>
           <td>{{drink.style}}</td>
           <td>{{drink.abv}}</td>
-          <td>{{drink.rating}}</td>
           <td>{{drink.company}}</td>
           <td>{{drink.city}}</td>
           <td>{{drink.state}}</td>
-          <td>{{drink.tasteNotes}}</td>
-          <td>{{drink.smellNotes}}</td>
-          <td>{{drink.otherNotes}}</td>
+          <td ng-hide="vm.isEditingDrink(drink._id)">{{drink.tasteNotes}}</td>
+          <td ng-show="vm.isEditingDrink(drink._id)">
+            <input type="text" class="form-control input-md" ng-model="vm.editedDrink.tasteNotes"></input>
+          </td>
+          <td ng-hide="vm.isEditingDrink(drink._id)">{{drink.smellNotes}}</td>
+          <td ng-show="vm.isEditingDrink(drink._id)">
+            <input type="text" class="form-control input-md" ng-model="vm.editedDrink.smellNotes"></input>
+          </td>
+          <td ng-hide="vm.isEditingDrink(drink._id)">{{drink.otherNotes}}</td>
+          <td ng-show="vm.isEditingDrink(drink._id)">
+            <input type="text" class="form-control input-md" ng-model="vm.editedDrink.otherNotes"></input>
+          </td>
+          <td ng-hide="vm.isEditingDrink(drink._id)">{{drink.rating}}</td>
+          <td ng-show="vm.isEditingDrink(drink._id)">
+            <input type="text" class="form-control input-md" ng-model="vm.editedDrink.rating"></input>
+          </td>
+          <td ng-hide="vm.isEditingDrink(drink._id)">
+            <span class="clickable-icon" ng-click="vm.beginEditDrink(drink._id)"><i class="fa fa-pencil-square-o"></i></span>
+            <span class="clickable-icon" ng-click="vm.deleteDrink(drink._id)"><i class="fa fa-trash"></i></span>
+          </td>
+          <td ng-show="vm.isEditingDrink(drink._id)">
+            <span class="clickable-icon" ng-click="vm.updateDrink()"><i class="fa fa-thumbs-o-up"></i></span>
+          </td>
         </tr>
       </tbody>
     </table>

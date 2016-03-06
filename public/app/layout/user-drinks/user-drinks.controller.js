@@ -82,20 +82,24 @@ function UserDrinksController(AuthService,DrinkFactory) {
   };
 
   function beginEditDrink(id){
-    for (var i=0; i<vm.drinks.length; i++){
-      if (vm.drinks[i]._id === id){
-        vm.editedDrink = vm.drinks[i];
+    for (var i=0; i<vm.userDrinks.length; i++){
+      if (vm.userDrinks[i]._id === id){
+        vm.editedDrink = vm.userDrinks[i];
         return;
       }
     }
   };
 
   function updateDrink(){
-    vm.editedDrink.addedBy = vm.userSession.user.username;
-    vm.editedDrink.timeAdded = (new Date()).toString();
-
-    DrinkFactory.editDrink(vm.userSession.token,vm.editedDrink,drinkEditedCallback,errorCallback);
-    
+    var updatedDrink = {
+      userId:     vm.userSession.user.username,
+      drinkId:    vm.editedDrink._id,
+      tasteNotes: vm.editedDrink.tasteNotes,
+      smellNotes: vm.editedDrink.smellNotes,
+      otherNotes: vm.editedDrink.otherNotes,
+      rating:     vm.editedDrink.rating
+    };
+    DrinkFactory.editUserDrink(vm.userSession.token,updatedDrink,drinkEditedCallback,errorCallback);
     vm.editedDrink = { _id:'' };
   };
 
@@ -106,14 +110,19 @@ function UserDrinksController(AuthService,DrinkFactory) {
   function deleteDrink(id){
     var confirmDelete = confirm('Are you sure you want to delete?');
     if (confirmDelete){
-      DrinkFactory.deleteDrink(vm.userSession.token,id,drinkEditedCallback,errorCallback);
+      var drinkToDelete = {
+        drinkId: id,
+        userId: vm.userSession.user.username
+      };
+      DrinkFactory.deleteUserDrink(vm.userSession.token,drinkToDelete,drinkEditedCallback,errorCallback);
+      console.log(drinkToDelete)
       var i;
-      for (i=0; i<vm.drinks.length; i++){
-        if (vm.drinks[i]._id === id){
+      for (i=0; i<vm.userDrinks.length; i++){
+        if (vm.userDrinks[i]._id === id){
           break;
         }
       }
-      vm.drinks.splice(i,1);
+      vm.userDrinks.splice(i,1);
     }
     vm.editMode = false;
   };
@@ -138,7 +147,7 @@ function UserDrinksController(AuthService,DrinkFactory) {
   };
 
   function selectDrink(selectedDrink){
-    vm.selectDrink = {};
+    vm.selectedDrink = {};
     vm.selectedDrink = selectedDrink;
     vm.userDrink.drinkId = selectedDrink._id;
     vm.userDrink.userId = vm.userSession.user.username;

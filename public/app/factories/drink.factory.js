@@ -13,7 +13,9 @@ function DrinkFactory($http) {
     findDrinkByName: findDrinkByName,
     findDrinkById: findDrinkById,
     editDrink: editDrink,
+    editUserDrink: editUserDrink,
     deleteDrink: deleteDrink,
+    deleteUserDrink: deleteUserDrink,
     addUserDrink: addUserDrink
   };
     
@@ -92,6 +94,21 @@ function DrinkFactory($http) {
     });
   };
 
+  function editUserDrink(token,drink,successCallback,errorCallback){
+    var header = {
+      headers: { 
+        'x-access-token': token 
+      }
+    };
+    return $http.put('/user-drinks/' + drink.userId + '/' + drink.drinkId, drink, header)
+    .success(function(data){
+      return successCallback(data);
+    })
+    .error(function(error){
+      return errorCallback(error);
+    });
+  };
+
   function deleteDrink(token,id,successCallback,errorCallback){
     var header = {
       headers: { 
@@ -99,6 +116,21 @@ function DrinkFactory($http) {
       }
     };
     return $http.delete('/drinks/' + id, header)
+    .success(function(data){
+      return successCallback(data);
+    })
+    .error(function(error){
+      return errorCallback(error);
+    });
+  };
+
+  function deleteUserDrink(token,drinkToDelete,successCallback,errorCallback){
+    var header = {
+      headers: { 
+        'x-access-token': token 
+      }
+    };
+    return $http.delete('/user-drinks/' + drinkToDelete.userId + '/' + drinkToDelete.drinkId, header)
     .success(function(data){
       return successCallback(data);
     })

@@ -49,8 +49,14 @@ module.exports = function(app) {
 	// Retrieve all drinks tied to a user ID
 	userDrinkRoutes.get('/:userId', function(req,res){
 		UserDrink.find({userId:req.params.userId}, function(err,userDrinks){
-			if (err) { res.send(err) };
-			if (userDrinks.length===0) { res.send({'message':'No drinks found!'})};
+			if (err) {
+				res.send(err)
+				return;
+			}
+			if (userDrinks.length===0) {
+				res.send({'message':'No drinks found!'})
+				return;
+			}
 
 			// For each user drink, find the rest of the drink data, add it to an object,
 			// and return that to the user. Recurse to find drinks synchronously.
@@ -75,8 +81,61 @@ module.exports = function(app) {
 		});
 	});
 
-
+	// Edit a user drink
+	userDrinkRoutes.put('/:userId/:drinkId', function(req,res){
+		UserDrink.find({drinkId:req.params.drinkId, userId:req.params.userId}, function(err,userDrink){
+			if (err) { res.send(err)
+				return;
+			}
+			if (userDrink.length > 1){
+				res.send({'message':'Found more than one drink to edit!'});
+				return;
+			}
+			if (userDrink.length === 0){
+				res.send({'message':'Could not find the drink to edit!'});
+				return;
+			}
+			var editedUserDrink = userDrink[0];
+			editedUserDrink.tasteNotes	= req.body.tasteNotes 	|| editedUserDrink.tasteNotes;
+			editedUserDrink.smellNotes  = req.body.smellNotes 	|| editedUserDrink.smellNotes;
+			editedUserDrink.otherNotes	= req.body.otherNotes   || editedUserDrink.otherNotes;
+			editedUserDrink.rating  	= req.body.rating  		|| editedUserDrink.rating;
+			editedUserDrink.save(function(err){
+				if (err) {
+					res.send(err)
+					return;
+				}
+				res.send({ message: 'Drink with ID ' + req.params.drinkId
+					+ ' was successfully updated for user ' + req.params.userId + '!'});
+				return;
+			});
+		});
+	});
 	
+	// Delete a user drink
+	userDrinkRoutes.delete('/:userId/:drinkId', function(req,res){
+		UserDrink.find({drinkId:req.params.drinkId, userId:req.params.userId}, function(err,userDrink){
+			if (err) {
+				res.send(err);
+				return;
+			}
+			if (userDrink.length > 1){
+				res.send({'message':'Found more than one drink to delete!'});
+				return;
+			}
+			if (userDrink.length === 0){
+				res.send({'message':'Could not find the drink to delete!'});
+				return;
+			}
+			var drinkToDelete = userDrink[0];
+
+			drinkToDelete.remove({ _id: drinkToDelete._id }, function(err,drink){
+				if (err) { res.send(err) };
+				res.send({ message: 'Successfully removed drink with id ' + req.params.drinkId 
+					+ ' for user ' + req.params.userId + '!' });
+			});
+		});
+	});
 
 	app.use('/user-drinks',userDrinkRoutes);
 
