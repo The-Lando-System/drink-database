@@ -8,34 +8,15 @@ DrinkFactory.$inject = ['$http'];
 function DrinkFactory($http) {
   return {
     getDrinks:  getDrinks,
-    getUserDrinks: getUserDrinks,
     addDrink:   addDrink,
     findDrinkByName: findDrinkByName,
     findDrinkById: findDrinkById,
     editDrink: editDrink,
-    editUserDrink: editUserDrink,
-    deleteDrink: deleteDrink,
-    deleteUserDrink: deleteUserDrink,
-    addUserDrink: addUserDrink
+    deleteDrink: deleteDrink
   };
     
   function getDrinks(successCallback,errorCallback){
     return $http.get('/drinks/')
-    .success(function(data){
-      return successCallback(data);
-    })
-    .error(function(error){
-      return errorCallback(error);
-    });
-  };
-
-  function getUserDrinks(token,userId,successCallback,errorCallback){
-    var header = {
-      headers: { 
-        'x-access-token': token 
-      }
-    };
-    return $http.get('/user-drinks/' + userId, header)
     .success(function(data){
       return successCallback(data);
     })
@@ -94,21 +75,6 @@ function DrinkFactory($http) {
     });
   };
 
-  function editUserDrink(token,drink,successCallback,errorCallback){
-    var header = {
-      headers: { 
-        'x-access-token': token 
-      }
-    };
-    return $http.put('/user-drinks/' + drink.userId + '/' + drink.drinkId, drink, header)
-    .success(function(data){
-      return successCallback(data);
-    })
-    .error(function(error){
-      return errorCallback(error);
-    });
-  };
-
   function deleteDrink(token,id,successCallback,errorCallback){
     var header = {
       headers: { 
@@ -124,35 +90,6 @@ function DrinkFactory($http) {
     });
   };
 
-  function deleteUserDrink(token,drinkToDelete,successCallback,errorCallback){
-    var header = {
-      headers: { 
-        'x-access-token': token 
-      }
-    };
-    return $http.delete('/user-drinks/' + drinkToDelete.userId + '/' + drinkToDelete.drinkId, header)
-    .success(function(data){
-      return successCallback(data);
-    })
-    .error(function(error){
-      return errorCallback(error);
-    });
-  };
-
-  function addUserDrink(token,userDrink,successCallback,errorCallback){
-    var header = {
-      headers: { 
-        'x-access-token': token 
-      }
-    };
-    return $http.post('/user-drinks/', userDrink, header)
-    .success(function(data){
-      return successCallback(data);
-    })
-    .error(function(error){
-      return errorCallback(error);
-    });
-  };
 };
 
 })();  

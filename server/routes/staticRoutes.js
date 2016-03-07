@@ -30,6 +30,9 @@ module.exports = function(app) {
 	staticRoutes.get('/user-drinks', function(req,res){
 		res.sendFile(index);
 	});
+	staticRoutes.get('/drink-admin', function(req,res){
+		res.sendFile(index);
+	});
 	staticRoutes.get('/user-management', function(req,res){
 		res.sendFile(index);
 	});

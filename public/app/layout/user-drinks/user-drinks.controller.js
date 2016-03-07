@@ -3,9 +3,9 @@
 angular.module('drink-db')
 .controller('UserDrinksController', UserDrinksController);
 
-UserDrinksController.$inject = ['AuthService','DrinkFactory'];
+UserDrinksController.$inject = ['AuthService','DrinkFactory','UserDrinkFactory'];
 
-function UserDrinksController(AuthService,DrinkFactory) {
+function UserDrinksController(AuthService,DrinkFactory,UserDrinkFactory) {
   
   var vm = this;
   
@@ -38,9 +38,9 @@ function UserDrinksController(AuthService,DrinkFactory) {
     vm.noDrinksMessage = false;
     vm.showAddDrink = false;
     vm.userDrinks = false;
+    vm.successMessage = false;
     vm.drinkName = '';
-    DrinkFactory.getUserDrinks(vm.userSession.token,vm.userSession.user.username,setUserDrinks,errorCallback);
-  
+    UserDrinkFactory.getUserDrinks(vm.userSession.token,vm.userSession.user.username,setUserDrinks,errorCallback);
   };
 
   function setUserDrinks(data){
@@ -71,6 +71,7 @@ function UserDrinksController(AuthService,DrinkFactory) {
   function findDrinkByName(){
     vm.isLoading = true;
     vm.errorMessage = false;
+    vm.successMessage = false;
     vm.noDrinksMessage = false;
     vm.drinks = false;
     vm.userDrinks = false;
@@ -99,23 +100,27 @@ function UserDrinksController(AuthService,DrinkFactory) {
       otherNotes: vm.editedDrink.otherNotes,
       rating:     vm.editedDrink.rating
     };
-    DrinkFactory.editUserDrink(vm.userSession.token,updatedDrink,drinkEditedCallback,errorCallback);
+    UserDrinkFactory.editUserDrink(vm.userSession.token,updatedDrink,drinkEditedCallback,errorCallback);
     vm.editedDrink = { _id:'' };
   };
 
   function drinkEditedCallback(data){
+    vm.isLoading = false;
+    vm.editMode = false;
     console.log(data);
   };
 
   function deleteDrink(id){
     var confirmDelete = confirm('Are you sure you want to delete?');
     if (confirmDelete){
+      vm.isLoading = true;
+      vm.errorMessage = false;
+      vm.successMessage = false;
       var drinkToDelete = {
         drinkId: id,
         userId: vm.userSession.user.username
       };
-      DrinkFactory.deleteUserDrink(vm.userSession.token,drinkToDelete,drinkEditedCallback,errorCallback);
-      console.log(drinkToDelete)
+      UserDrinkFactory.deleteUserDrink(vm.userSession.token,drinkToDelete,drinkDeletedCallback,errorCallback);
       var i;
       for (i=0; i<vm.userDrinks.length; i++){
         if (vm.userDrinks[i]._id === id){
@@ -124,26 +129,31 @@ function UserDrinksController(AuthService,DrinkFactory) {
       }
       vm.userDrinks.splice(i,1);
     }
+  };
+
+  function drinkDeletedCallback(data){
+    vm.isLoading = false;
     vm.editMode = false;
+    console.log(data);
   };
 
   function addDrink(){
-    console.log(vm.userDrink);
-    DrinkFactory.addUserDrink(vm.userSession.token,vm.userDrink,drinkSuccessfullyAdded,errorCallback);
-    vm.userDrink = {};
     vm.showSearch = false;
     vm.drinks = false;
     vm.errorMessage = false;
     vm.noDrinksMessage = false;
-    vm.isLoading = false;
+    vm.isLoading = true;
     vm.editMode = false;
     vm.showAddDrink = false;
     vm.userDrinks = false;
+    UserDrinkFactory.addUserDrink(vm.userSession.token,vm.userDrink,drinkSuccessfullyAdded,errorCallback);
   };
 
   function drinkSuccessfullyAdded(data){
     vm.successMessage = "Drink successfully created!";
     console.log(data);
+    vm.isLoading = false;
+    vm.userDrink = {};
   };
 
   function selectDrink(selectedDrink){
