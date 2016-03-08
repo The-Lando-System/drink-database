@@ -1,14 +1,124 @@
-<div class="row top">
+<!-- Find a drink to edit -->
+<div class="row">
+  <div class ="container">
+    <h2>Drink Administration</h2>    
+  </div>
+</div>
+<div class="row">
   <div class="container">
-    <div class="col-md-3">
-      <h2>{{vm.hello}}</h2>
+    <button class="btn btn-primary btn-large" ng-click="vm.showSearch = true; vm.showAddDrinkForm = false; vm.successMessage = false; vm.errorMessage = false;">Find Drink by Name</button>
+  </div>
+</div>
+<div class="row">
+  <div class="container">
+    <button class="btn btn-info btn-large" ng-click="vm.getDrinks()">View All Drinks</button>
+  </div>
+</div>
+<div class="row">
+  <div class="container">
+    <button class="btn btn-primary btn-large" ng-click="vm.showAddDrinkForm = true; vm.showSearch = false; vm.successMessage = false; vm.errorMessage = false; vm.drinks = false;">Add a New Drink</button>
+  </div>
+</div>
+<div class="row">
+  <div class="container">
+    <div class="col-md-4" ng-show="vm.errorMessage">
+      <error-message></error-message>
     </div>
     <div class="col-md-4" ng-show="vm.successMessage">
       <success-message></success-message>
     </div>
   </div>
 </div>
-<form name="newDrinkForm" ng-submit="vm.addDrink()" novalidate>
+<div class="row" ng-show="vm.showSearch">
+  <div class="container">
+    <div class="col-md-4">
+      <div class="input-group">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" ng-click="vm.findDrinkByName()">Search</button>
+        </span>
+        <input type="text" class="form-control" ng-model="vm.drinkName" placeholder="Enter Drink Name">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" ng-show="vm.isLoading">
+  <div class="container">
+    <img src="/images/hex-loader.gif" height="100" width="150">
+  </div>
+</div>
+<div class="row" ng-show="vm.noDrinksMessage">
+  <div class="container">
+    <div class="col-md-4">
+      <h3>{{vm.noDrinksMessage}}</h3>
+    </div>
+  </div>
+</div>
+<div class="row" ng-show="vm.drinks">
+  <div id="drink-table" class="container">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Name</th>
+          <th>Style</th>
+          <th>ABV</th>
+          <th>Company</th>
+          <th>City</th>
+          <th>State</th>
+          <th ng-show="vm.userSession.isAdmin">
+            <span class="clickable-icon" ng-click="vm.editMode = true" ng-hide="vm.editMode"><i class="fa fa-pencil-square-o"></i></span>
+            <span class="clickable-icon" ng-click="vm.editMode = false" ng-show="vm.editMode"><i class="fa fa-ban"></i></span>
+          </th>
+        </tr>
+      </thead>
+        <tbody>
+        <tr ng-repeat="drink in vm.drinks">
+          <td ng-hide="vm.isEditingDrink(drink._id)">{{drink.type}}</td>
+          <td ng-show="vm.isEditingDrink(drink._id)">
+            <input type="text" class="form-control input-md" ng-model="vm.editedDrink.type"></input>
+          </td>
+          <td ng-hide="vm.isEditingDrink(drink._id)">{{drink.name}}</td>
+          <td ng-show="vm.isEditingDrink(drink._id)">
+            <input type="text" class="form-control input-md" ng-model="vm.editedDrink.name"></input>
+          </td>
+          <td ng-hide="vm.isEditingDrink(drink._id)">{{drink.style}}</td>
+          <td ng-show="vm.isEditingDrink(drink._id)">
+            <input type="text" class="form-control input-md" ng-model="vm.editedDrink.style"></input>
+          </td>
+          <td ng-hide="vm.isEditingDrink(drink._id)">{{drink.abv}}</td>
+          <td ng-show="vm.isEditingDrink(drink._id)">
+            <input type="text" class="form-control input-md" ng-model="vm.editedDrink.abv"></input>
+          </td>
+          <td ng-hide="vm.isEditingDrink(drink._id)">{{drink.company}}</td>
+          <td ng-show="vm.isEditingDrink(drink._id)">
+            <input type="text" class="form-control input-md" ng-model="vm.editedDrink.company"></input>
+          </td>
+          <td ng-hide="vm.isEditingDrink(drink._id)">{{drink.city}}</td>
+          <td ng-show="vm.isEditingDrink(drink._id)">
+            <input type="text" class="form-control input-md" ng-model="vm.editedDrink.city"></input>
+          </td>
+          <td ng-hide="vm.isEditingDrink(drink._id)">{{drink.state}}</td>
+          <td ng-show="vm.isEditingDrink(drink._id)">
+            <input type="text" class="form-control input-md" ng-model="vm.editedDrink.state"></input>
+          </td>
+          <div ng-show="vm.userSession.isAdmin">
+            <td ng-hide="vm.isEditingDrink(drink._id) || !vm.editMode">
+              <span class="clickable-icon" ng-click="vm.beginEditDrink(drink._id)"><i class="fa fa-pencil-square-o"></i></span>
+              <span class="clickable-icon" ng-click="vm.deleteDrink(drink._id)"><i class="fa fa-trash"></i></span>
+            </td>
+            <td ng-show="vm.isEditingDrink(drink._id)">
+              <span class="clickable-icon" ng-click="vm.updateDrink()"><i class="fa fa-thumbs-o-up"></i></span>
+            </td>
+          </div>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- Add a new drink -->
+<form name="newDrinkForm" ng-submit="vm.addDrink()" novalidate ng-show="vm.showAddDrinkForm">
   <div class="row">
     <div class="container">
       <table class="table">

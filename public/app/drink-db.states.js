@@ -26,12 +26,6 @@ function config($urlRouterProvider,$stateProvider,$locationProvider) {
     controller: 'DrinkAdministrationController',
     controllerAs: 'vm'
   })
-  .state('drink-finder', {
-    url: '/drink-finder',
-    templateUrl: '/app/layout/drink-finder/drink-finder.html',
-    controller: 'DrinkFinderController',
-    controllerAs: 'vm'
-  })
   .state('drink-viewer', {
     url: '/drink-viewer',
     templateUrl: '/app/layout/drink-viewer/drink-viewer.html',
