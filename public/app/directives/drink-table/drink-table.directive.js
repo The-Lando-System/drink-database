@@ -9,7 +9,11 @@ function drinkTable() {
     restrict: 'E',
     scope: {
     	drinkInfo: '=data',
-    	rowClick: '&rowClick'
+      editable: '@editable',
+    	rowClick: '&onRowClick',
+      beginEdit: '&beginEdit',
+      delete: '&delete',
+      update: '&update'
     }
   };
 };

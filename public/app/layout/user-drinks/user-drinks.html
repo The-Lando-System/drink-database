@@ -49,43 +49,14 @@
 </div>
 
 <!-- Find a Drink Table -->
-<div class="row" ng-show="vm.drinks">
+<div class="row" ng-show="vm.searchResults">
   <div id="drink-table" class="container">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Name</th>
-          <th>Style</th>
-          <th>ABV</th>
-          <th>Company</th>
-          <th>City</th>
-          <th>State</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="drink in vm.drinks" ng-click="vm.selectDrink(drink)">    
-          <td>{{drink.type}}</td>
-          <td>{{drink.name}}</td>
-          <td>{{drink.style}}</td>
-          <td>{{drink.abv}}</td>
-          <td>{{drink.company}}</td>
-          <td>{{drink.city}}</td>
-          <td>{{drink.state}}</td>
-        </tr>
-      </tbody>
-    </table>
+    <drink-table
+      data="vm.searchResults"
+      on-row-click="vm.selectDrink(clickedDrink)">
+    </drink-table>
   </div>
 </div>
-
-
-<!-- DIRECTIVE TEST -->
-<div class="row">
-  <div class="container">
-    <drink-table data="vm.drinkInfo" row-click="vm.clickRow(testDrink)"></drink-table>
-  </div>
-</div>
-
 
 <!-- User Drink Table -->
 <div class="row" ng-show="vm.userDrinks">
@@ -145,6 +116,7 @@
   </div>
 </div>
 
+<!-- Add a new user drink form -->
 <form name="newDrinkForm" ng-show="vm.showAddDrink" ng-submit="vm.addDrink()" novalidate>
   <div class="row">
     <div class="container">

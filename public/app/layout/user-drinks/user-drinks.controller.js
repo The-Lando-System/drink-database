@@ -20,7 +20,7 @@ function UserDrinksController(AuthService,DrinkFactory,UserDrinkFactory) {
   vm.addDrink = addDrink;
   vm.drinkName = '';
   vm.showSearch = false;
-  vm.drinks = false;
+  vm.searchResults = false;
   vm.userDrinks = false;
   vm.errorMessage = false;
   vm.successMessage = false;
@@ -47,6 +47,25 @@ function UserDrinksController(AuthService,DrinkFactory,UserDrinkFactory) {
 
   vm.clickRow = clickRow;
   function clickRow(msg) {
+    console.log("Row clicked")
+    console.log(msg);
+  };
+
+  vm.testBeginEdit = testBeginEdit;
+  function testBeginEdit(msg) {
+    console.log("Begin edit")
+    console.log(msg);
+  };
+
+  vm.testDelete = testDelete;
+  function testDelete(msg) {
+    console.log("Delete")
+    console.log(msg);
+  };
+
+  vm.testUpdate = testUpdate;
+  function testUpdate(msg) {
+    console.log("Update")
     console.log(msg);
   };
   // ====== END TESTING =============
@@ -76,7 +95,21 @@ function UserDrinksController(AuthService,DrinkFactory,UserDrinkFactory) {
     if (data.hasOwnProperty('message')){
       vm.noDrinksMessage = data.message;
     } else {
-      vm.drinks = data;
+      
+      vm.searchResults = {};
+
+      vm.searchResults.headers = [
+        {name:'Type', attrName:'type'},
+        {name:'Name', attrName:'name'},
+        {name:'Style', attrName:'style'},
+        {name:'ABV', attrName:'abv'},
+        {name:'Company', attrName:'company'},
+        {name:'City', attrName:'city'},
+        {name:'State', attrName:'state'}
+      ];
+
+      vm.searchResults.drinks = data;
+
     }
     vm.isLoading = false;
     vm.userDrinks = false;
@@ -93,7 +126,7 @@ function UserDrinksController(AuthService,DrinkFactory,UserDrinkFactory) {
     vm.errorMessage = false;
     vm.successMessage = false;
     vm.noDrinksMessage = false;
-    vm.drinks = false;
+    vm.searchResults = false;
     vm.userDrinks = false;
     DrinkFactory.findDrinkByName(vm.drinkName,setDrinks,errorCallback);
   };
@@ -159,7 +192,7 @@ function UserDrinksController(AuthService,DrinkFactory,UserDrinkFactory) {
 
   function addDrink(){
     vm.showSearch = false;
-    vm.drinks = false;
+    vm.searchResults = false;
     vm.errorMessage = false;
     vm.noDrinksMessage = false;
     vm.isLoading = true;
@@ -182,7 +215,7 @@ function UserDrinksController(AuthService,DrinkFactory,UserDrinkFactory) {
     vm.userDrink.drinkId = selectedDrink._id;
     vm.userDrink.userId = vm.userSession.user.username;
     vm.showSearch = false;
-    vm.drinks = false;
+    vm.searchResults = false;
     vm.errorMessage = false;
     vm.noDrinksMessage = false;
     vm.isLoading = false;

@@ -1,15 +1,46 @@
+<!-- SAMPLE USAGE
+
+//  Action when a row is clicked
+<drink-table
+  data="vm.drinkInfo"
+  on-row-click="vm.clickRow(testDrink)"
+  >
+</drink-table>
+
+//  Edit, update, and delete data on each row
+<drink-table
+  data="vm.drinkInfo"
+  editable="true"
+  begin-edit="vm.testBeginEdit(testDrink)"
+  delete="vm.testDelete(testDrink)"
+  update="vm.testUpdate(testDrink)"
+  >
+</drink-table>
+-->
+
 <table class="table table-hover">
   <thead>
     <tr>
       <th ng-repeat="header in drinkInfo.headers track by $index">
         {{header.name}}
       </th>
+      <th ng-show="editable === 'true'">Action</th>
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="drink in drinkInfo.drinks track by $index" ng-click="rowClick({testDrink:drink})">    
-      <td ng-repeat="header in drinkInfo.headers track by $index">
+    <tr ng-repeat="drink in drinkInfo.drinks track by $index" ng-click="rowClick({clickedDrink:drink})">    
+      <td ng-hide="editMode" ng-repeat="header in drinkInfo.headers track by $index">
         {{drink[header.attrName]}}
+      </td>
+      <td ng-show="editMode" ng-repeat="header in drinkInfo.headers track by $index">
+        <input type="text" class="form-control input-md" ng-model="drink[header.attrName]"></input>
+      </td>
+      <td ng-show="!editMode && editable === 'true'">
+        <span class="clickable-icon" ng-click="editMode = true; beginEdit({testDrink:drink})"><i class="fa fa-pencil-square-o"></i></span>
+        <span class="clickable-icon" ng-click="delete({testDrink:drink})"><i class="fa fa-trash"></i></span>
+      </td>
+      <td ng-show="editMode">
+        <span class="clickable-icon" ng-click="editMode = false; update({testDrink:drink})"><i class="fa fa-thumbs-o-up"></i></span>
       </td>
     </tr>
   </tbody>
