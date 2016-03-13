@@ -1,0 +1,16 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th ng-repeat="header in drinkInfo.headers track by $index">
+        {{header.name}}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="drink in drinkInfo.drinks track by $index" ng-click="rowClick({testDrink:drink})">    
+      <td ng-repeat="header in drinkInfo.headers track by $index">
+        {{drink[header.attrName]}}
+      </td>
+    </tr>
+  </tbody>
+</table>

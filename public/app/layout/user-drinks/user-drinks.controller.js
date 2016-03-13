@@ -30,6 +30,26 @@ function UserDrinksController(AuthService,DrinkFactory,UserDrinkFactory) {
   vm.editedDrink = { _id:'' };
   vm.showAddDrink = false;
   vm.userDrink = {};
+
+  // ====== TESTING =============
+  DrinkFactory.findDrinkByName(vm.drinkName,setTestDrinks,errorCallback);
+  function setTestDrinks(data){
+
+    vm.drinkInfo = {};
+
+    vm.drinkInfo.headers = [
+      {name:'Type', attrName:'type'},
+      {name:'Name', attrName:'name'}
+    ];
+
+    vm.drinkInfo.drinks = data;
+  };
+
+  vm.clickRow = clickRow;
+  function clickRow(msg) {
+    console.log(msg);
+  };
+  // ====== END TESTING =============
   
   function getMyDrinks(){
     vm.isLoading = true;

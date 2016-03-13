@@ -50,6 +50,9 @@ module.exports = function(app) {
 	staticRoutes.get('/navbar', function(req,res){
 		res.sendFile(base + '/public/app/layout/navbar/navbar.html');
 	});
+	staticRoutes.get('/drink-table', function(req,res){
+		res.sendFile(base + '/public/app/directives/drink-table/drink-table.html');
+	});
 
 	app.use('/',staticRoutes);
 };
