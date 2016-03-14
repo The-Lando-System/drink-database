@@ -3,9 +3,9 @@
 angular.module('drink-db')
 .controller('UserDrinksController', UserDrinksController);
 
-UserDrinksController.$inject = ['AuthService','DrinkFactory','UserDrinkFactory'];
+UserDrinksController.$inject = ['AuthService','DrinkFactory','UserDrinkFactory','$uibModal'];
 
-function UserDrinksController(AuthService,DrinkFactory,UserDrinkFactory) {
+function UserDrinksController(AuthService,DrinkFactory,UserDrinkFactory,$uibModal) {
   
   var vm = this;
   
@@ -86,7 +86,25 @@ function UserDrinksController(AuthService,DrinkFactory,UserDrinkFactory) {
     if (data.hasOwnProperty('message')){
       vm.noDrinksMessage = data.message;
     } else {
-      vm.userDrinks = data;
+
+      vm.userDrinks = {};
+
+      vm.userDrinks.headers = [
+        {name:'Type', attrName:'type'},
+        {name:'Name', attrName:'name'},
+        {name:'Style', attrName:'style'},
+        {name:'ABV', attrName:'abv'},
+        {name:'Company', attrName:'company'},
+        {name:'City', attrName:'city'},
+        {name:'State', attrName:'state'},
+        {name:'Taste Notes', attrName:'tasteNotes'},
+        {name:'Smell Notes', attrName:'smellNotes'},
+        {name:'Other Notes', attrName:'otherNotes'},
+        {name:'Rating', attrName:'rating'}
+      ];
+
+      vm.userDrinks.drinks = data;
+
     }
     vm.isLoading = false;
   };
@@ -222,6 +240,46 @@ function UserDrinksController(AuthService,DrinkFactory,UserDrinkFactory) {
     vm.editMode = false;
     vm.showAddDrink = true;
     vm.userDrinks = false;
+  };
+
+  vm.beginEditDrink2 = beginEditDrink2;
+  function beginEditDrink2(drinkToEdit){
+    console.log(drinkToEdit);
+  };
+
+  vm.deleteDrink2 = deleteDrink2;
+  function deleteDrink2(drinkToDelete){
+    console.log(drinkToDelete);
+  };
+
+  vm.updateDrink2 = updateDrink2;
+  function updateDrink2(drinkToUpdate){
+    console.log(drinkToUpdate);
+  };
+
+  vm.items = ['item1', 'item2', 'item3'];
+
+  vm.open = open;
+
+  function open(size) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: '/modal',
+      controller: 'ModalController',
+      controllerAs: 'vm',
+      size: size,
+      resolve: {
+        items: function () {
+          return vm.items;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      vm.selected = selectedItem;
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
   };
   
 };

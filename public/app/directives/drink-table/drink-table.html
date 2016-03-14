@@ -36,11 +36,11 @@
         <input type="text" class="form-control input-md" ng-model="drink[header.attrName]"></input>
       </td>
       <td ng-show="!editMode && editable === 'true'">
-        <span class="clickable-icon" ng-click="editMode = true; beginEdit({testDrink:drink})"><i class="fa fa-pencil-square-o"></i></span>
-        <span class="clickable-icon" ng-click="delete({testDrink:drink})"><i class="fa fa-trash"></i></span>
+        <span class="clickable-icon" ng-click="editMode = true; beginEdit({drinkToEdit:drink})"><i class="fa fa-pencil-square-o"></i></span>
+        <span class="clickable-icon" ng-click="delete({drinkToDelete:drink})"><i class="fa fa-trash"></i></span>
       </td>
       <td ng-show="editMode">
-        <span class="clickable-icon" ng-click="editMode = false; update({testDrink:drink})"><i class="fa fa-thumbs-o-up"></i></span>
+        <span class="clickable-icon" ng-click="editMode = false; update({drinkToUpdate:drink})"><i class="fa fa-thumbs-o-up"></i></span>
       </td>
     </tr>
   </tbody>

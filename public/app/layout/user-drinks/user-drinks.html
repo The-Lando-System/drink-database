@@ -3,6 +3,14 @@
     <h2>Manage your Drinks!</h2>    
   </div>
 </div>
+
+<div class="row">
+  <div class="container">
+    <button type="button" class="btn btn-default" ng-click="vm.open('lg')">Open me!</button>
+    <h4>{{vm.selected}}</h4>
+  </div>
+</div>
+
 <div class="row">
   <div class="container">
     <button class="btn btn-primary btn-large" ng-click="vm.showSearch = true; vm.showAddDrink = false; vm.userDrinks = false; vm.successMessage = false; vm.noDrinksMessage = false;">Find a new Drink!</button>
@@ -50,7 +58,7 @@
 
 <!-- Find a Drink Table -->
 <div class="row" ng-show="vm.searchResults">
-  <div id="drink-table" class="container">
+  <div class="container">
     <drink-table
       data="vm.searchResults"
       on-row-click="vm.selectDrink(clickedDrink)">
@@ -59,6 +67,19 @@
 </div>
 
 <!-- User Drink Table -->
+<div class="row" ng-show="vm.userDrinks">
+  <div class="container">
+    <drink-table
+      data="vm.userDrinks"
+      editable="true"
+      begin-edit="vm.beginEditDrink2(drinkToEdit)"
+      delete="vm.deleteDrink2(drinkToDelete)"
+      update="vm.updateDrink2(drinkToUpdate)">
+    </drink-table>
+  </div>
+</div>
+
+<!-- Old User Drink Table 
 <div class="row" ng-show="vm.userDrinks">
   <div id="user-drink-table" class="container">
     <table class="table table-hover">
@@ -115,6 +136,7 @@
     </table>
   </div>
 </div>
+-->
 
 <!-- Add a new user drink form -->
 <form name="newDrinkForm" ng-show="vm.showAddDrink" ng-submit="vm.addDrink()" novalidate>

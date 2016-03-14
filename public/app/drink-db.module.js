@@ -5,6 +5,7 @@ angular.module('drink-db', [
 	'angular-jwt',
 	'ngRoute',
 	'ui.router',
+	'ui.bootstrap',
 	'ngAnimate'
 ]);
 

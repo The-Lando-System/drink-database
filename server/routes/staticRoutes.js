@@ -53,6 +53,9 @@ module.exports = function(app) {
 	staticRoutes.get('/drink-table', function(req,res){
 		res.sendFile(base + '/public/app/directives/drink-table/drink-table.html');
 	});
+	staticRoutes.get('/modal', function(req,res){
+		res.sendFile(base + '/public/app/layout/modal/modal.html');
+	});
 
 	app.use('/',staticRoutes);
 };
